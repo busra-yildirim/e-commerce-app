@@ -1,5 +1,5 @@
-
-import Styled from 'styled-components';
+import Styled from "styled-components";
+import appImage from "../Assets/Group 6607.svg";
 
 export const Header = Styled.div`
 
@@ -23,11 +23,18 @@ export const HomeContainer = Styled.div`
 `;
 export const AppImage = Styled.image`
 
-    background-image: url("../Assets/Group 6607.svg");
+    background: transparent url('${appImage}') no-repeat padding-box;
+    width: 200px;
+    height: 60px;
+    background-size:contain;
+
+    margin-bottom: 30px;
+
 `;
 export const ContainerImage = Styled.image`
 
     background-image: url("../Assets/Banner1.png");
+    
 `;
 export const Button = Styled.button`
     background: var(--unnamed-color-f0f8ff) 0% 0% no-repeat padding-box;

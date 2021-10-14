@@ -1,4 +1,12 @@
-import { LoginPageFormWrapper } from "../../Components/ScSignIn";
+import {
+  Form,
+  FormTitle,
+  FormInfo,
+  FormLabel,
+  FormInput,
+  FormButton,
+  FormFooter,
+} from "../../Components/ScSignIn";
 import { useRef } from "react";
 const SignIn = () => {
   const emailInput = useRef(null);
@@ -9,28 +17,27 @@ const SignIn = () => {
     console.log(passwordInput.current.value);
   };
   return (
-    <LoginPageFormWrapper onSubmit={handleClick}>
-      <h3> Giriş Yap </h3>
-      <h5>Fırsatlardan yararlanmak için giriş yap!</h5>
-      <label>Email</label>
-      <input
+    <Form onSubmit={handleClick}>
+      <FormTitle> Giriş Yap </FormTitle>
+      <FormInfo>Fırsatlardan yararlanmak için giriş yap!</FormInfo>
+      <FormLabel>Email</FormLabel>
+      <FormInput
         type="email"
         ref={emailInput}
         placeholder="email@example.com"
         required
       />
-      <label>Şifre</label>
-      <input
+      <FormLabel>Şifre</FormLabel>
+      <FormInput
         type="password"
         ref={passwordInput}
         required
         minLength="8"
         maxLength="20"
       />
-      <button type="submit">Giriş</button>
-      <span>Hesabın yok mu? </span>
-      <h4>Üye Ol</h4>
-    </LoginPageFormWrapper>
+      <FormButton type="submit">Giriş</FormButton>
+      <FormFooter>Hesabın yok mu? Üye Ol</FormFooter>
+    </Form>
   );
 };
 export default SignIn;

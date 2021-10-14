@@ -1,4 +1,4 @@
-import { LoginPageFormWrapper } from "../../Components/ScSignIn";
+import { LoginPageFormWrapper, FormTitle } from "../../Components/ScSignIn";
 import axios from "axios";
 import { useRef } from "react";
 
@@ -23,7 +23,7 @@ const SignUp = () => {
   };
   return (
     <LoginPageFormWrapper onSubmit={handleClick}>
-      <h3> Üye ol </h3>
+      <FormTitle> Üye ol </FormTitle>
       <h5>Fırsatlardan yararlanmak için üye ol!</h5>
       <label>Email</label>
       <input
