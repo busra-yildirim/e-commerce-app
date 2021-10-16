@@ -14,6 +14,11 @@ const Home = () => {
     axios
       .get("http://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
       .then((response) => {
+        response.data.unshift({
+          title: "Hepsi",
+          id: "all",
+        });
+
         setAllCategories(response.data);
       })
       .catch((error) => {
@@ -25,9 +30,8 @@ const Home = () => {
     <>
       <ContainerImage />
       <CategoryTitleWraapper>
-        Hepsi
         {allCategories.map((item) => (
-          <CategoryTitle> {item.title} </CategoryTitle>
+          <CategoryTitle key={item.id}> {item.title} </CategoryTitle>
         ))}
       </CategoryTitleWraapper>
       <Products allCategories={allCategories} />

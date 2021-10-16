@@ -17,7 +17,6 @@ export const LoginPageImage = Styled.img`
         background-position: center center;
         background-size: cover;
 
-
 `;
 export const LoginPageFormWrapper = Styled.div`
         margin: 0 auto;
@@ -32,7 +31,7 @@ export const FormTitle = Styled.div`
         text-align: center;
         font: normal normal bold 26px/43px Nunito;
         letter-spacing: 0px;
-        color: #525252
+        color: #525252;
 `;
 
 export const Form = Styled.form`
@@ -92,4 +91,11 @@ export const FormFooter = Styled.div`
         opacity: 1;
         color: #525252;
         font-size: 10px;
+`;
+export const FormSpan = Styled.span`
+        text-align: center;
+        font: normal normal bold 10px/20px Nunito;
+        letter-spacing: 0px;
+        color: #4B9CE2;
+        padding-left: 5px;
 `;

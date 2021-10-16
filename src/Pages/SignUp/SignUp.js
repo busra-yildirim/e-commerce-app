@@ -1,8 +1,19 @@
-import { LoginPageFormWrapper, FormTitle } from "../../Components/ScSignIn";
+import {
+  FormTitle,
+  FormInfo,
+  FormLabel,
+  FormInput,
+  FormButton,
+  FormFooter,
+  FormSpan,
+  Form,
+} from "../../Components/ScSignIn";
 import axios from "axios";
 import { useRef } from "react";
+import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
+  let history = useHistory();
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
   axios
@@ -10,40 +21,38 @@ const SignUp = () => {
       email: "yldrm42@gmail.com",
       password: "string122345",
     })
-    .then((response) => {
-      console.log(response.data);
-    })
+    .then((response) => {})
     .catch((error) => {
       console.log(error);
     });
   const handleClick = (event) => {
     event.preventDefault();
-    console.log(emailInput.current.value);
-    console.log(passwordInput.current.value);
   };
   return (
-    <LoginPageFormWrapper onSubmit={handleClick}>
+    <Form onSubmit={handleClick}>
       <FormTitle> Üye ol </FormTitle>
-      <h5>Fırsatlardan yararlanmak için üye ol!</h5>
-      <label>Email</label>
-      <input
+      <FormInfo>Fırsatlardan yararlanmak için üye ol!</FormInfo>
+      <FormLabel>Email</FormLabel>
+      <FormInput
         type="email"
         ref={emailInput}
         placeholder="email@example.com"
         required
       />
-      <label>Şifre</label>
-      <input
+      <FormLabel>Şifre</FormLabel>
+      <FormInput
         type="password"
         ref={passwordInput}
         required
         minLength="8"
         maxLength="20"
       />
-      <button type="submit">Üye Ol</button>
-      <span>Hesabın yok mu? </span>
-      <h4>Giriş Yap</h4>
-    </LoginPageFormWrapper>
+      <FormButton type="submit">Üye Ol</FormButton>
+      <FormFooter>
+        Hesabın yok mu?{" "}
+        <FormSpan onClick={() => history.push("/sign-in")}>Giriş Yap</FormSpan>
+      </FormFooter>
+    </Form>
   );
 };
 export default SignUp;

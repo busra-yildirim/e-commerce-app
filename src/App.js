@@ -4,6 +4,7 @@ import Home from "./Pages/Home/Home";
 import LoginLayout from "./layouts/LoginLayout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             <LoginLayout>
               <SignUp />
             </LoginLayout>
+          </Route>
+          <Route path="/add-product">
+            <AddProduct />
           </Route>
         </Switch>
       </Router>

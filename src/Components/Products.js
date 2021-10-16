@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ProductWrapper } from "./ScProducts";
+import { ProductContainer } from "./ScProducts";
+import ProductItem from "./ProductItem";
 
 const Products = ({ allCategories }) => {
-  const [allBrands, setAllBrands] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://bootcampapi.techcs.io/api/fe/v1/detail/brand/all")
+      .get("http://bootcampapi.techcs.io/api/fe/v1/product/all")
       .then((response) => {
-        setAllBrands(response.data.title);
-        console.log({ allBrands });
+        setAllProducts(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -18,12 +18,11 @@ const Products = ({ allCategories }) => {
   }, []);
 
   return (
-    <ProductWrapper>
-      product image
-      <div>Product brand solda</div>
-      <div>Product renk sağda</div>
-      <div>fiyat</div>
-    </ProductWrapper>
+    <ProductContainer>
+      {allProducts.map((item) => (
+        <ProductItem key={item.id} products={item} />
+      ))}
+    </ProductContainer>
   );
 };
 export default Products;

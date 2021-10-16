@@ -1,59 +1,78 @@
 import Styled from "styled-components";
-import appImage from "../Assets/Group 6607.svg";
 
-export const Header = Styled.div`
+import mainImage from "../Assets/Banner1.png";
 
-    height: 10vh;
+export const HeaderWrapper = Styled.div`
+    height: 80px;
     background-color: white;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+export const Header = Styled.div`
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
 `;
 
 export const HomeWrapper = Styled.div`
-
-    height: 90vh;
-    background-color: #F2F2F2;
-    
+    background-color:#F2F2F2;   
+    flex:1;
 `;
-export const HomeContainer = Styled.div`
-
-    width:1200px;
-    height: 90vh;
+export const Container = Styled.div`
+    max-width:1480px;
     margin: 0 auto;
-  
-`;
-export const AppImage = Styled.image`
-
-    background: transparent url('${appImage}') no-repeat padding-box;
-    width: 200px;
-    height: 60px;
-    background-size:contain;
-
-    margin-bottom: 30px;
+    width: 100%;
 
 `;
-export const ContainerImage = Styled.image`
+export const AppImage = Styled.img`
+    
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
 
-    background-image: url("../Assets/Banner1.png");
+    margin-bottom: ${(props) => props.marginBottom};
+`;
+export const ContainerImage = Styled.img`
+
+    background-image: url(${mainImage});
+    width: 100%;
+    height: 300px;
+    border-radius:8px;
+    margin-top: 10px;
     
 `;
 export const Button = Styled.button`
-    background: var(--unnamed-color-f0f8ff) 0% 0% no-repeat padding-box;
-    background: #F0F8FF 0% 0% no-repeat padding-box;
+
+    background: #F0F8FF 0% 0% no-repeat;
     border-radius: 8px;
-    color: var(--unnamed-color-4b9ce2);
     text-align: right;
     font: normal normal bold 15px/20px Nunito;
     letter-spacing: 0px;
     color: #4B9CE2;
     border: none;
+    font-size: 15px;
+    margin-left: 10px;
+`;
+
+export const ButtonWrapper = Styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 export const CategoryTitleWraapper = Styled.div`
    
     display:flex;
     justify-content:space-between;
+    display: flex;
+    height: 60px;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 20px;
+    color: #525252;
 
 `;
 export const CategoryTitle = Styled.div`
    
-    
+   text-transform: capitalize;
 `;
