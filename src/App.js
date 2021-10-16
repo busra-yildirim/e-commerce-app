@@ -5,6 +5,8 @@ import LoginLayout from "./layouts/LoginLayout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import AddProduct from "./Pages/AddProduct/AddProduct";
+import AccountPage from "./Pages/AccountPage/AccountPage";
+import ProductDetailPage from "./Pages/ProductDetail/ProductDetailPage";
 
 function App() {
   return (
@@ -28,7 +30,19 @@ function App() {
             </LoginLayout>
           </Route>
           <Route path="/add-product">
-            <AddProduct />
+            <MainLayout>
+              <AddProduct />
+            </MainLayout>
+          </Route>
+          <Route path="/account-page">
+            <MainLayout>
+              <AccountPage />
+            </MainLayout>
+          </Route>
+          <Route path="/productDetailPage/:id">
+            <MainLayout>
+              <ProductDetailPage />
+            </MainLayout>
           </Route>
         </Switch>
       </Router>

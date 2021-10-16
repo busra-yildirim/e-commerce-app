@@ -5,6 +5,7 @@ import {
   ProductColor,
   ProductPrice,
   ProductImageWrapper,
+  BrandAndColorWrapper,
 } from "./ScProducts";
 
 const ProductItem = ({ products }) => {
@@ -17,8 +18,11 @@ const ProductItem = ({ products }) => {
       <ProductImageWrapper>
         <ProductImage src={products.imageUrl} />
       </ProductImageWrapper>
-      <ProductBrand>{products.brand.title}</ProductBrand>
-      <ProductColor>{products.color.title}</ProductColor>
+      <BrandAndColorWrapper>
+        <ProductBrand>{products.brand.title}</ProductBrand>
+        <ProductColor>{products.color.title}</ProductColor>
+      </BrandAndColorWrapper>
+
       <ProductPrice>{products.price}</ProductPrice>
     </ProductWrapper>
   );

@@ -18,7 +18,7 @@ const SignIn = () => {
     event.preventDefault();
   };
   return (
-    <Form className="ercü" onSubmit={handleClick}>
+    <Form onSubmit={handleClick}>
       <FormTitle> Giriş Yap </FormTitle>
       <FormInfo>Fırsatlardan yararlanmak için giriş yap!</FormInfo>
       <FormLabel>Email</FormLabel>

@@ -29,11 +29,11 @@ export const ProductContainer = Styled.div`
 
 `;
 export const ProductBrand = Styled.div`
-
+    display: flex;
 `;
 
 export const ProductColor = Styled.div`
-
+    display: flex;
 `;
 
 export const ProductPrice = Styled.div`
@@ -43,4 +43,7 @@ export const ProductImageWrapper = Styled.div`
     width: 260px;
     height: 297px;
     border-radius: 8px;
+`;
+export const BrandAndColorWrapper = Styled.div`
+    display: flex;
 `;
