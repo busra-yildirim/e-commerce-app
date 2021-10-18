@@ -27,7 +27,7 @@ export const LoginPageFormWrapper = Styled.div`
         border-radius: 5px;
 `;
 export const FormTitle = Styled.div`
-        color: var(--unnamed-color-525252);
+       
         text-align: center;
         font: normal normal bold 26px/43px Nunito;
         letter-spacing: 0px;
@@ -74,7 +74,7 @@ export const FormInput = Styled.input`
         }
         `;
 export const FormButton = Styled.button`
-        background: var(--unnamed-color-4b9ce2) 0% 0% no-repeat padding-box;
+       
         background: #4B9CE2 0% 0% no-repeat padding-box;
         border-radius: 8px;
         opacity: 1;

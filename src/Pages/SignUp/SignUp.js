@@ -9,24 +9,31 @@ import {
   Form,
 } from "../../Components/ScSignIn";
 import axios from "axios";
-import { useRef } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { setToken } from "../../services/service";
 
 const SignUp = () => {
   let history = useHistory();
-  const emailInput = useRef(null);
-  const passwordInput = useRef(null);
-  axios
-    .post("http://bootcampapi.techcs.io/api/fe/v1/authorization/signup", {
-      email: "yldrm42@gmail.com",
-      password: "string122345",
-    })
-    .then((response) => {})
-    .catch((error) => {
-      console.log(error);
-    });
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const handleClick = (event) => {
     event.preventDefault();
+    axios
+      .post("http://bootcampapi.techcs.io/api/fe/v1/authorization/signup", {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        setToken(response.data.access_token);
+        history.push("/");
+        console.log(response.data);
+        console.log("email", email);
+        console.log("password", password);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <Form onSubmit={handleClick}>
@@ -35,17 +42,17 @@ const SignUp = () => {
       <FormLabel>Email</FormLabel>
       <FormInput
         type="email"
-        ref={emailInput}
         placeholder="email@example.com"
         required
+        onChange={(e) => setEmail(e.target.value)}
       />
       <FormLabel>Şifre</FormLabel>
       <FormInput
         type="password"
-        ref={passwordInput}
         required
         minLength="8"
         maxLength="20"
+        onChange={(e) => setPassword(e.target.value)}
       />
       <FormButton type="submit">Üye Ol</FormButton>
       <FormFooter>

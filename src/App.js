@@ -39,7 +39,7 @@ function App() {
               <AccountPage />
             </MainLayout>
           </Route>
-          <Route path="/productDetailPage/:id">
+          <Route path="/ItemDetailPage/:id">
             <MainLayout>
               <ProductDetailPage />
             </MainLayout>
