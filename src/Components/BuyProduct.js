@@ -10,11 +10,15 @@ const BuyProduct = ({ closeBuyingModal }) => {
           <ConfirmButton
             color="#4B9CE2"
             backgroundColor="#F0F8FF"
-            onClick={() => closeBuyingModal()}
+            onClick={() => closeBuyingModal(false)}
           >
             Vazgeç
           </ConfirmButton>
-          <ConfirmButton color="#FFFFFF" backgroundColor="#4B9CE2">
+          <ConfirmButton
+            color="#FFFFFF"
+            backgroundColor="#4B9CE2"
+            onClick={() => closeBuyingModal(true)}
+          >
             Onayla
           </ConfirmButton>
         </div>

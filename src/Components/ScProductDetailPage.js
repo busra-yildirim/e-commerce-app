@@ -23,6 +23,7 @@ export const SelectedProductWrapper = styled.div`
       font: normal normal normal 34px/23px Nunito;
       color: #555555;
       text-transform: capitalize;
+      margin-bottom: 10px;
     }
   }
   .price {
@@ -115,4 +116,21 @@ export const DetailButton = styled.div`
   justify-content: center;
   margin-right: 20px;
   margin: ${(props) => props.margin};
+`;
+export const SoldNotify = styled.div`
+  width: 321px;
+  height: 60px;
+  background: #f1fff0 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 12px #1e36482e;
+  border-radius: 8px;
+  font: normal normal normal 16px/23px Nunito;
+  color: #46af32;
+  position: fixed;
+  top: 70px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-right: 30px;
 `;

@@ -23,6 +23,7 @@ const AddProduct = () => {
             required
             height="45px"
             width="730px"
+            maxLength="100"
           />
           <ProductLabel>Açıklama</ProductLabel>
           <ProductInput
@@ -31,11 +32,12 @@ const AddProduct = () => {
             required
             height="92px"
             width="730px"
+            maxLength="500"
           />
           <div className="Select">
             <div className="SelectWrapper">
               <ProductLabel>Kategori</ProductLabel>
-              <SelectProduct>
+              <SelectProduct required>
                 <OptionProduct value="" default selected>
                   Kategori seç
                 </OptionProduct>
@@ -43,7 +45,7 @@ const AddProduct = () => {
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Marka</ProductLabel>
-              <SelectProduct>
+              <SelectProduct required>
                 <OptionProduct value="" default selected>
                   Marka seç
                 </OptionProduct>
@@ -51,7 +53,7 @@ const AddProduct = () => {
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Renk</ProductLabel>
-              <SelectProduct>
+              <SelectProduct required>
                 <OptionProduct value="" default selected>
                   Renk seç
                 </OptionProduct>
@@ -59,7 +61,7 @@ const AddProduct = () => {
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Kullanım Durumu</ProductLabel>
-              <SelectProduct>
+              <SelectProduct required>
                 <OptionProduct value="" default selected>
                   Kullanım durumu seç
                 </OptionProduct>
@@ -68,13 +70,14 @@ const AddProduct = () => {
             <div className="priceAndOfferWrapper">
               <ProductLabel>Fiyat</ProductLabel>
               <ProductInput
-                type="text"
+                type="number"
                 placeholder="Bir fiyat girin TL"
                 required
                 height="45px"
                 width="236px"
               />
               <ProductLabel>Teklif opsiyonu</ProductLabel>
+              <input type="radio" />
             </div>
           </div>
         </Product>

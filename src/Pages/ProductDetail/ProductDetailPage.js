@@ -6,16 +6,21 @@ import {
   ProductProperty,
   DetailButton,
   GivenOffer,
+  SoldNotify,
 } from "../../Components/ScProductDetailPage";
 
 import OfferModal from "../../Components/OfferModal";
 import BuyProduct from "../../Components/BuyProduct";
+import checkIcon from "../../Assets/Group 6792.svg";
+
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [selectedProduct, setSelectedProduct] = useState({});
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
+  const [notifyText, setNotifyText] = useState("");
+  const [showNotify, setShowNotify] = useState(false);
   useEffect(() => {
     axios
       .get(`http://bootcampapi.techcs.io/api/fe/v1/product/${id}`)
@@ -28,20 +33,24 @@ const ProductDetailPage = () => {
   const handleGivenOffer = () => {
     console.log("test");
   };
-  const openModal = (event) => {
+  const openModal = () => {
     setIsOpen(true);
-    console.log("tıklandı");
   };
   const closeModal = () => {
     setIsOpen(false);
   };
 
-  const openBuyingModal = (event) => {
+  const openBuyingModal = () => {
     setIsOpenBuyingModal(true);
-    console.log("tıklandı");
   };
-  const closeBuyingModal = () => {
+  const closeBuyingModal = (isClicked) => {
+    setShowNotify(false);
     setIsOpenBuyingModal(false);
+    if (isClicked) {
+      setIsOpenBuyingModal(false);
+      setNotifyText("Satın Alındı");
+      setShowNotify(true);
+    }
   };
 
   return (
@@ -105,6 +114,12 @@ const ProductDetailPage = () => {
       </div>
       {isOpenBuyingModal && <BuyProduct closeBuyingModal={closeBuyingModal} />}
       {isOpen && <OfferModal closeModal={closeModal} />}
+      {showNotify && (
+        <SoldNotify>
+          <img src={checkIcon} alt="checkIcon" />
+          <span>{notifyText}</span>
+        </SoldNotify>
+      )}
     </SelectedProductWrapper>
   );
 };

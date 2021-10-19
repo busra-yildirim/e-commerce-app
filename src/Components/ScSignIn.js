@@ -120,7 +120,6 @@ export const Error = Styled.div`
         font: normal normal normal 16px/23px Nunito;
         animation: notify 0.8s ease-in-out;
         display: flex;
-        justify-content:center;
         align-items: center;
         gap:10px;
 

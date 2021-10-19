@@ -10,8 +10,12 @@ import {
 import accountImage from "../../Assets/Group 6876.svg";
 import { GivenOffer } from "../../Components/ScProductDetailPage";
 import { getUserInfo } from "../../services/service";
+import { useState } from "react-dom";
+import BuyProduct from "../../Components/BuyProduct";
+
 const AccountPage = () => {
   const userEmail = getUserInfo();
+
   return (
     <AccountPageWrapper>
       <Account>
@@ -55,6 +59,7 @@ const AccountPage = () => {
           </StatusButton>*/}
         </ProductCard>
       </OfferWrapper>
+      {/*<BuyProduct closeBuyingModal={closeBuyingModal} />*/}
     </AccountPageWrapper>
   );
 };
