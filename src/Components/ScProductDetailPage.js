@@ -8,6 +8,7 @@ export const mainImage = styled.img`
 export const SelectedProductWrapper = styled.div`
   display: flex;
   gap: 40px;
+  background: white;
   .productDetailImage {
     width: 50%;
   }

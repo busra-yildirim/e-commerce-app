@@ -19,21 +19,22 @@ const HeaderLayout = () => {
       <Container>
         <Header>
           <AppImage src={appImage} width="100px" height="50px" />
-          <ButtonWrapper>
-            {token ? (
-              (<Button onClick={() => history.push("/add-product")}>
+          {token ? (
+            <ButtonWrapper>
+              <Button onClick={() => history.push("/add-product")}>
                 + Ürün Ekle
-              </Button>)(
-                <Button onClick={() => history.push("/account-page")}>
-                  Hesabım
-                </Button>
-              )
-            ) : (
+              </Button>
+              <Button onClick={() => history.push("/account-page")}>
+                Hesabım
+              </Button>
+            </ButtonWrapper>
+          ) : (
+            <ButtonWrapper>
               <Button onClick={() => history.push("/sign-in")}>
                 Giriş Yap
               </Button>
-            )}
-          </ButtonWrapper>
+            </ButtonWrapper>
+          )}
         </Header>
       </Container>
     </HeaderWrapper>

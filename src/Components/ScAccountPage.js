@@ -10,8 +10,20 @@ export const Account = styled.div`
   height: 70px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 8px;
+  display: flex;
+
+  align-items: center;
+  gap: 20px;
   img {
-    padding: 10px 0 0 30px;
+    padding: 0 0 0 30px;
+  }
+  .userMail {
+    width: 157px;
+    height: 20px;
+    text-align: left;
+    font: normal normal bold 15px/20px Nunito;
+    letter-spacing: 0px;
+    color: #525252;
   }
 `;
 
@@ -51,6 +63,12 @@ export const ProductCard = styled.div`
   margin: 20px 40px;
   padding: 10px;
 
+  .productWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
   .titleGivenOfferWrapper {
     display: flex;
     flex-direction: column;

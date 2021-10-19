@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { setToken } from "../../services/service";
+import { setToken, setUserInfo } from "../../services/service";
 
 const SignUp = () => {
   let history = useHistory();
@@ -26,6 +26,7 @@ const SignUp = () => {
       })
       .then((response) => {
         setToken(response.data.access_token);
+        setUserInfo(email);
         history.push("/");
         console.log(response.data);
         console.log("email", email);

@@ -7,9 +7,15 @@ import {
   DetailButton,
   GivenOffer,
 } from "../../Components/ScProductDetailPage";
+
+import OfferModal from "../../Components/OfferModal";
+import BuyProduct from "../../Components/BuyProduct";
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [selectedProduct, setSelectedProduct] = useState({});
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   useEffect(() => {
     axios
       .get(`http://bootcampapi.techcs.io/api/fe/v1/product/${id}`)
@@ -18,6 +24,26 @@ const ProductDetailPage = () => {
         setSelectedProduct(response.data);
       });
   }, []);
+
+  const handleGivenOffer = () => {
+    console.log("test");
+  };
+  const openModal = (event) => {
+    setIsOpen(true);
+    console.log("tıklandı");
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const openBuyingModal = (event) => {
+    setIsOpenBuyingModal(true);
+    console.log("tıklandı");
+  };
+  const closeBuyingModal = () => {
+    setIsOpenBuyingModal(false);
+  };
+
   return (
     <SelectedProductWrapper>
       <img
@@ -42,10 +68,18 @@ const ProductDetailPage = () => {
         <div className="price">{selectedProduct.price} TL</div>
         <GivenOffer>Verilen Teklif:</GivenOffer>
         <div className="detail-button">
-          <DetailButton color="#FFFFFF" background="#4B9CE2">
+          <DetailButton
+            color="#FFFFFF"
+            background="#4B9CE2"
+            onClick={openBuyingModal}
+          >
             Satın Al
           </DetailButton>
-          <DetailButton color="#4B9CE2" background="#F0F8FF">
+          <DetailButton
+            color="#4B9CE2"
+            background="#F0F8FF"
+            onClick={openModal}
+          >
             Teklif Geri Çek
           </DetailButton>
         </div>
@@ -55,6 +89,8 @@ const ProductDetailPage = () => {
           {selectedProduct.description}
         </div>
       </div>
+      {isOpenBuyingModal && <BuyProduct closeBuyingModal={closeBuyingModal} />}
+      {isOpen && <OfferModal closeModal={closeModal} />}
     </SelectedProductWrapper>
   );
 };

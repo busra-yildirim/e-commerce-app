@@ -60,7 +60,7 @@ export const ButtonWrapper = Styled.div`
     justify-content: center;
     align-items: center;
 `;
-export const CategoryTitleWraapper = Styled.div`
+export const CategoryTitleWrapper = Styled.div`
    
     display:flex;
     justify-content:space-between;

@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   ContainerImage,
   CategoryTitle,
-  CategoryTitleWraapper,
+  CategoryTitleWrapper,
 } from "../../Components/ScHome";
 import { useState, useEffect } from "react";
 import Products from "../../Components/Products";
@@ -10,6 +10,7 @@ import Products from "../../Components/Products";
 const Home = () => {
   //const token = getToken();
   const [allCategories, setAllCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Hepsi");
   // const config = {
   //       headers: { Authorization: `Bearer ${token}` }
   // };
@@ -28,16 +29,21 @@ const Home = () => {
         console.log(error);
       });
   }, []);
-
+  const filteredToCategory = (event) => {
+    setSelectedCategory(event.target.innerText);
+  };
   return (
     <>
       <ContainerImage />
-      <CategoryTitleWraapper>
+      <CategoryTitleWrapper onClick={filteredToCategory}>
         {allCategories.map((item) => (
           <CategoryTitle key={item.id}> {item.title} </CategoryTitle>
         ))}
-      </CategoryTitleWraapper>
-      <Products allCategories={allCategories} />
+      </CategoryTitleWrapper>
+      <Products
+        allCategories={allCategories}
+        selectedCategory={selectedCategory}
+      />
     </>
   );
 };
