@@ -5,31 +5,32 @@ import ProductItem from "./ProductItem";
 
 const Products = ({ allCategories, selectedCategory }) => {
   const [allProducts, setAllProducts] = useState([]);
-  // const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log("selected", selectedCategory);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  console.log("selected", selectedCategory.toLowerCase());
   useEffect(() => {
     axios
       .get("http://bootcampapi.techcs.io/api/fe/v1/product/all")
       .then((response) => {
         console.log("test", response.data);
         setAllProducts(response.data);
+        setFilteredProducts(response.data);
 
         if (selectedCategory !== "Hepsi") {
-          const filteredProducts = allProducts.filter((item) =>
-            console.log("1", item.category.title)
+          const filteredProducts = allProducts.filter(
+            (item) => item.category.title === selectedCategory.toLowerCase()
           );
-          console.log("filteredProducts", filteredProducts);
-          setAllProducts(filteredProducts);
+          setFilteredProducts(filteredProducts);
         }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
+  }, [selectedCategory]);
+  console.log("filteredProducts", filteredProducts);
   return (
     <ProductContainer>
-      {allProducts.map((item) => (
+      {filteredProducts.map((item) => (
         <ProductItem key={item.id} products={item} />
       ))}
     </ProductContainer>

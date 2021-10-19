@@ -25,10 +25,13 @@ const ProductItem = ({ products }) => {
       </ProductImageWrapper>
       <BrandAndColorWrapper>
         <ProductBrand>{products.brand.title}</ProductBrand>
-        <ProductColor>{products.color.title}</ProductColor>
+        <ProductColor>
+          <span>Renk:</span>
+          {products.color.title}
+        </ProductColor>
       </BrandAndColorWrapper>
 
-      <ProductPrice>{products.price}</ProductPrice>
+      <ProductPrice>{products.price} TL</ProductPrice>
     </ProductWrapper>
   );
 };
