@@ -2,8 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ProductContainer } from "./ScProducts";
 import ProductItem from "./ProductItem";
+import { getSessionStorageSelectedCategory } from "../services/service.js";
 
 const Products = ({ allCategories, selectedCategory }) => {
+  const getSelectedCategory = getSessionStorageSelectedCategory();
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -16,9 +18,9 @@ const Products = ({ allCategories, selectedCategory }) => {
         setAllProducts(response.data);
         setFilteredProducts(response.data);
 
-        if (selectedCategory !== "Hepsi") {
+        if (getSelectedCategory !== "Hepsi") {
           const filteredProducts = allProducts.filter(
-            (item) => item.category.title === selectedCategory.toLowerCase()
+            (item) => item.category.title === getSelectedCategory.toLowerCase()
           );
           setFilteredProducts(filteredProducts);
         }

@@ -7,6 +7,7 @@ import {
 import { useState, useEffect } from "react";
 import Products from "../../Components/Products";
 //import { getToken } from "../../services/service";
+import { setSessionStorageSelectedCategory } from "../../services/service.js";
 const Home = () => {
   //const token = getToken();
   const [allCategories, setAllCategories] = useState([]);
@@ -30,6 +31,7 @@ const Home = () => {
       });
   }, []);
   const filteredToCategory = (event) => {
+    setSessionStorageSelectedCategory(event.target.innerText);
     setSelectedCategory(event.target.innerText);
   };
   return (

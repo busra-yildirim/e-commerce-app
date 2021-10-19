@@ -66,7 +66,21 @@ const ProductDetailPage = () => {
           <div>{selectedProduct.status?.title}</div>
         </ProductProperty>
         <div className="price">{selectedProduct.price} TL</div>
-        <GivenOffer>Verilen Teklif:</GivenOffer>
+        {selectedProduct.isSold && (
+          <DetailButton
+            color="#FAAD60"
+            background="#FFF0E2"
+            onClick={openModal}
+            margin="30px 0"
+          >
+            Bu Ürün Satışta Değil
+          </DetailButton>
+        )}
+        {!selectedProduct.isSold && selectedProduct.isOfferable ? (
+          <GivenOffer>Verilen Teklif:</GivenOffer>
+        ) : (
+          ""
+        )}
         <div className="detail-button">
           <DetailButton
             color="#FFFFFF"

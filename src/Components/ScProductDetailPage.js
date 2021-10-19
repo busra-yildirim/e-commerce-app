@@ -10,10 +10,11 @@ export const SelectedProductWrapper = styled.div`
   gap: 40px;
   background: white;
   .productDetailImage {
-    width: 50%;
+    width: 700px;
+    height: 737px;
   }
   .productPropertyWrapper {
-    padding: 40px;
+    padding: 40px 0;
 
     .title {
       width: 378px;
@@ -30,17 +31,23 @@ export const SelectedProductWrapper = styled.div`
     text-align: left;
     font: normal normal bold 25px/23px Nunito;
     color: #525252;
+    margin-top: 30px;
   }
 
   .detail-button {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin: 20px 0 40px 0;
   }
   .description {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    width: 480px;
+    height: 66px;
+    text-align: left;
+    font: normal normal normal 15px/23px Nunito;
+    color: #555555;
     span {
       width: 76px;
       height: 24px;
@@ -91,7 +98,7 @@ export const ProductProperty = styled.div`
     text-align: left;
     font: normal normal normal 15px/20px Nunito;
     color: #525252;
-    flex: 3;
+    flex: 4;
     text-transform: capitalize;
   }
 `;
@@ -107,4 +114,5 @@ export const DetailButton = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  margin: ${(props) => props.margin};
 `;

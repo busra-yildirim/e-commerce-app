@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Styled from "styled-components";
 import loginImage from "../Assets/Group52.png";
 
@@ -69,8 +70,11 @@ export const FormInput = Styled.input`
         height: 30px;
         &:focus {
                 outline:0;
-                background-color: #FFF2F2;
-                border: 1px solid #F77474;
+              //  background-color: #FFF2F2;
+             //   border: 1px solid #F77474;
+             border-radius: 8px;
+             border: 1px solid #4B9CE2;
+             background: #F0F8FF 0% 0% no-repeat padding-box;
         }
         `;
 export const FormButton = Styled.button`
@@ -98,4 +102,27 @@ export const FormSpan = Styled.span`
         letter-spacing: 0px;
         color: #4B9CE2;
         padding-left: 5px;
+`;
+export const Error = Styled.div`
+        width: 321px;
+        height: 60px;
+        position: fixed;
+        top: 70px;
+        right: 0;
+        background-color: #b9e6ba;
+        display: flex;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 30px;
+        box-shadow: 0px 3px 12px #1E36482E;
+        background: #FFE5E5 0% 0% no-repeat padding-box;
+        color: #F77474;
+        font: normal normal normal 16px/23px Nunito;
+        animation: notify 0.8s ease-in-out;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        gap:10px;
+
+
 `;
