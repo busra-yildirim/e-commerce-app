@@ -30,9 +30,6 @@ const ProductDetailPage = () => {
       });
   }, []);
 
-  const handleGivenOffer = () => {
-    console.log("test");
-  };
   const openModal = () => {
     setIsOpen(true);
   };

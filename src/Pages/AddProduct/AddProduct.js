@@ -7,9 +7,43 @@ import {
   FormProduct,
   ProductInput,
 } from "../../Components/ScAddProduct";
-import uploadImage from "../../Assets/Group 6911.svg";
 
+import axios from "axios";
+import { useState, useEffect } from "react";
+import DropArea from "../../Components/DropArea";
 const AddProduct = () => {
+  const [categories, setCategories] = useState([]);
+  const [color, setColor] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [status, setStatus] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
+      .then((response) => {
+        setCategories(response.data);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/color/all")
+      .then((response) => {
+        setColor(response.data);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/brand/all")
+      .then((response) => {
+        setBrand(response.data);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/status/all")
+      .then((response) => {
+        setStatus(response.data);
+      });
+  }, []);
   return (
     <AddProductWrapper>
       <FormProduct>
@@ -38,33 +72,45 @@ const AddProduct = () => {
             <div className="SelectWrapper">
               <ProductLabel>Kategori</ProductLabel>
               <SelectProduct required>
-                <OptionProduct value="" default selected>
+                <OptionProduct value="" defaultValue>
                   Kategori seç
                 </OptionProduct>
+                {categories.map((item) => (
+                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                ))}
               </SelectProduct>
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Marka</ProductLabel>
               <SelectProduct required>
-                <OptionProduct value="" default selected>
+                <OptionProduct value="" defaultValue>
                   Marka seç
                 </OptionProduct>
+                {brand.map((item) => (
+                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                ))}
               </SelectProduct>
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Renk</ProductLabel>
               <SelectProduct required>
-                <OptionProduct value="" default selected>
+                <OptionProduct value="" defaultValue>
                   Renk seç
                 </OptionProduct>
+                {color.map((item) => (
+                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                ))}
               </SelectProduct>
             </div>
             <div className="SelectWrapper">
               <ProductLabel>Kullanım Durumu</ProductLabel>
               <SelectProduct required>
-                <OptionProduct value="" default selected>
+                <OptionProduct value="" defaultValue>
                   Kullanım durumu seç
                 </OptionProduct>
+                {status.map((item) => (
+                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                ))}
               </SelectProduct>
             </div>
             <div className="priceAndOfferWrapper">
@@ -82,17 +128,10 @@ const AddProduct = () => {
           </div>
         </Product>
 
-        <Product flex="4">
-          <div>Ürün Görseli</div>
-          <div className="uploadFile">
-            <img src={uploadImage} alt="" />
-            <span>Sürükleyip bırakarak yükle</span>
-            <span>veya</span>
-            <div class="selectImage">Görsel Seçin</div>
-            <span>PNG ve JPEG Dosya boyutu: max. 100kb</span>
-          </div>
-        </Product>
-        <button className="saveButton">Kaydet</button>
+        <DropArea />
+        <button type="submit" className="saveButton">
+          Kaydet
+        </button>
       </FormProduct>
     </AddProductWrapper>
   );

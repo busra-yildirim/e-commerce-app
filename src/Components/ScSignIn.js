@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Styled from "styled-components";
 import loginImage from "../Assets/Group52.png";
 

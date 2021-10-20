@@ -63,6 +63,26 @@ export const Product = styled.div`
       color: #b1b1b1;
     }
   }
+  .imageWrapper {
+    position: relative;
+    width: 113px;
+    height: 113px;
+    .uploadedImage {
+      width: 113px;
+      height: 113px;
+      background: transparent 0% 0% no-repeat padding-box;
+      border-radius: 8px;
+    }
+    .remove {
+      position: absolute;
+      top: -13px;
+      right: -30px;
+      width: 40px;
+      height: 40px;
+
+      border-radius: 8px;
+    }
+  }
 `;
 export const ProductLabel = styled.div`
   width: 116px;
@@ -87,6 +107,9 @@ export const ProductInput = styled.input`
   }
   &:focus {
     outline: 0;
+    background: #f0f8ff 0% 0% no-repeat padding-box;
+    border: 1px solid #4b9ce2;
+    border-radius: 8px;
   }
 `;
 
@@ -96,6 +119,9 @@ export const SelectProduct = styled.select`
   background: #f4f4f4 0% 0% no-repeat padding-box;
   border-radius: 8px;
   border: none;
+  text-transform: capitalize;
+  font: normal normal normal 16px/22px Nunito;
+  color: #b1b1b1;
   &:focus {
     outline: 0;
   }
@@ -107,13 +133,17 @@ export const OptionProduct = styled.option`
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 12px #1e36482e;
   border-radius: 8px;
-  &[default] {
-    width: 88px;
-    height: 22px;
-    text-align: left;
+  font: normal normal normal 16px/22px Nunito;
+  color: #3e3e3e;
+  text-transform: capitalize;
+  font: normal normal normal 16px/22px Nunito;
+  color: #b1b1b1;
+
+  &:hover {
     font: normal normal normal 16px/22px Nunito;
-    color: #99a0a7;
-    display: none;
+    color: #4b9ce2;
+    background: #f2f2f2 0% 0% no-repeat padding-box;
+    border-radius: 10px;
   }
 `;
 export const FormProduct = styled.div`
