@@ -1,5 +1,5 @@
 import { GivenOfferWrapper, ModalWrapper } from "./ScOfferModal";
-import closeImage from "../Assets/Group 6618.svg";
+import closeImage from "../../../assets/Group 6618.svg";
 //import checkImage from "../Ellipse 1304 - Outline.svg";
 const OfferModal = ({ closeModal }) => {
   //<img src={checkImage} alt="" />

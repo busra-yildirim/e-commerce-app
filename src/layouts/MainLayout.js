@@ -1,4 +1,4 @@
-import { HomeWrapper, Container } from "../Components/ScHome";
+import { HomeWrapper, Container } from "../Pages/Home/ScHome";
 import HeaderLayout from "./HeaderLayout";
 
 const MainLayout = ({ children }) => {

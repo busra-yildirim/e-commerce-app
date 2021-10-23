@@ -8,12 +8,12 @@ import {
   FormFooter,
   FormSpan,
   Error,
-} from "../../Components/ScSignIn";
+} from "../ScLogin";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { setToken, setUserInfo } from "../../services/service";
-import errorIcon from "../../Assets/Group 6835.svg";
+import { setToken, setUserInfo } from "../../../utils";
+import errorIcon from "../../../assets/errorIcon.svg";
 
 const SignIn = () => {
   let history = useHistory();

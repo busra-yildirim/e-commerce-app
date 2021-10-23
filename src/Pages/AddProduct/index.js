@@ -6,11 +6,11 @@ import {
   ProductLabel,
   FormProduct,
   ProductInput,
-} from "../../Components/ScAddProduct";
+} from "./ScAddProduct";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import DropArea from "../../Components/DropArea";
+import DropArea from "../../components/DropArea";
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [color, setColor] = useState([]);
@@ -44,9 +44,13 @@ const AddProduct = () => {
         setStatus(response.data);
       });
   }, []);
+
+  const handleSubmit = () => {
+    console.log("tıklandı");
+  };
   return (
     <AddProductWrapper>
-      <FormProduct>
+      <FormProduct onClick={handleSubmit}>
         <Product flex="5">
           <div> Ürün Detayları </div>
 
@@ -58,6 +62,7 @@ const AddProduct = () => {
             height="45px"
             width="730px"
             maxLength="100"
+            s
           />
           <ProductLabel>Açıklama</ProductLabel>
           <ProductInput

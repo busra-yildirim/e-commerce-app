@@ -6,10 +6,10 @@ import {
   OfferTab,
   StatusButton,
   ProductImage,
-} from "../../Components/ScAccountPage";
-import accountImage from "../../Assets/Group 6876.svg";
-import { GivenOffer } from "../../Components/ScProductDetailPage";
-import { getUserInfo } from "../../services/service";
+} from "./ScAccountPage";
+import accountImage from "../../assets/Group 6876.svg";
+import { GivenOffer } from "../ProductDetail/ScProductDetailPage";
+import { getUserInfo } from "../../utils";
 
 const AccountPage = () => {
   const userEmail = getUserInfo();

@@ -1,13 +1,9 @@
 import axios from "axios";
-import {
-  ContainerImage,
-  CategoryTitle,
-  CategoryTitleWrapper,
-} from "../../Components/ScHome";
+import { ContainerImage, CategoryTitle, CategoryTitleWrapper } from "./ScHome";
 import { useState, useEffect } from "react";
-import Products from "../../Components/Products";
+import Products from "../../components/Products";
 //import { getToken } from "../../services/service";
-import { setSessionStorageSelectedCategory } from "../../services/service.js";
+import { setSessionStorageSelectedCategory } from "../../utils/index.js";
 const Home = () => {
   //const token = getToken();
   const [allCategories, setAllCategories] = useState([]);

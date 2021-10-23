@@ -7,11 +7,11 @@ import {
   DetailButton,
   GivenOffer,
   SoldNotify,
-} from "../../Components/ScProductDetailPage";
+} from "./ScProductDetailPage";
 
-import OfferModal from "../../Components/OfferModal";
-import BuyProduct from "../../Components/BuyProduct";
-import checkIcon from "../../Assets/Group 6792.svg";
+import OfferModal from "../../components/modals/Offer/OfferModal";
+import BuyProduct from "../../components/modals/Buying/BuyProduct";
+import checkIcon from "../../assets/Group 6792.svg";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -73,12 +73,7 @@ const ProductDetailPage = () => {
         </ProductProperty>
         <div className="price">{selectedProduct.price} TL</div>
         {selectedProduct.isSold && (
-          <DetailButton
-            color="#FAAD60"
-            background="#FFF0E2"
-            onClick={openModal}
-            margin="30px 0"
-          >
+          <DetailButton color="#FAAD60" background="#FFF0E2" margin="30px 0">
             Bu Ürün Satışta Değil
           </DetailButton>
         )}
@@ -87,23 +82,34 @@ const ProductDetailPage = () => {
         ) : (
           ""
         )}
-        <div className="detail-button">
-          <DetailButton
-            color="#FFFFFF"
-            background="#4B9CE2"
-            onClick={openBuyingModal}
-          >
-            Satın Al
-          </DetailButton>
-          <DetailButton
-            color="#4B9CE2"
-            background="#F0F8FF"
-            onClick={openModal}
-          >
-            Teklif Geri Çek
-          </DetailButton>
-        </div>
-
+        {!selectedProduct.isSold && (
+          <div className="detail-button">
+            <DetailButton
+              color="#FFFFFF"
+              background="#4B9CE2"
+              onClick={openBuyingModal}
+            >
+              Satın Al
+            </DetailButton>
+            {selectedProduct.isOfferable ? (
+              <DetailButton
+                color="#4B9CE2"
+                background="#F0F8FF"
+                onClick={openModal}
+              >
+                Teklif Ver
+              </DetailButton>
+            ) : (
+              <DetailButton
+                color="#4B9CE2"
+                background="#F0F8FF"
+                onClick={openModal}
+              >
+                Teklif Geri Çek
+              </DetailButton>
+            )}
+          </div>
+        )}
         <div className="description">
           <span>Açıklama</span>
           {selectedProduct.description}

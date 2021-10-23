@@ -5,10 +5,10 @@ import {
   Container,
   ButtonWrapper,
   HeaderWrapper,
-} from "../Components/ScHome";
-import appImage from "../Assets/Group 6607.svg";
+} from "../Pages/Home/ScHome";
+import appImage from "../assets/Group 6607.svg";
 import { useHistory } from "react-router-dom";
-import { getToken } from "../services/service";
+import { getToken } from "../utils";
 
 const HeaderLayout = () => {
   let history = useHistory();

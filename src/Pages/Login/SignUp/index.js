@@ -7,11 +7,11 @@ import {
   FormFooter,
   FormSpan,
   Form,
-} from "../../Components/ScSignIn";
+} from "../ScLogin";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { setToken, setUserInfo } from "../../services/service";
+import { setToken, setUserInfo } from "../../../utils";
 
 const SignUp = () => {
   let history = useHistory();

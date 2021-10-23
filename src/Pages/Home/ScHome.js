@@ -1,6 +1,6 @@
 import Styled from "styled-components";
 
-import mainImage from "../Assets/Banner1.png";
+import mainImage from "../../assets/Banner1.png";
 
 export const HeaderWrapper = Styled.div`
     height: 80px;

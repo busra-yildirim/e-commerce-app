@@ -3,9 +3,9 @@ import {
   LoginPageWrapper,
   LoginPageImage,
   LoginPageFormWrapper,
-} from "../Components/ScSignIn";
-import { AppImage } from "../Components/ScHome";
-import appImage from "../Assets/Group 6607.svg";
+} from "../Pages/Login/ScLogin";
+import { AppImage } from "../Pages/Home/ScHome";
+import appImage from "../assets/Group 6607.svg";
 const LoginLayout = ({ children }) => {
   return (
     <LoginPageContainer>

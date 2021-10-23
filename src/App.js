@@ -1,51 +1,56 @@
-import SignIn from "./Pages/SignIn/SignIn";
-import SignUp from "./Pages/SignUp/SignUp";
-import Home from "./Pages/Home/Home";
+import SignIn from "./Pages/Login/SignIn";
+import SignUp from "./Pages/Login/SignUp";
+import Home from "./Pages/Home";
 import LoginLayout from "./layouts/LoginLayout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import AddProduct from "./Pages/AddProduct/AddProduct";
-import AccountPage from "./Pages/AccountPage/AccountPage";
-import ProductDetailPage from "./Pages/ProductDetail/ProductDetailPage";
-
+import AddProduct from "./Pages/AddProduct";
+import AccountPage from "./Pages/AccountPage";
+import ProductDetailPage from "./Pages/ProductDetail";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer from "./reducers";
 function App() {
+  const store = createStore(reducer);
   return (
     <div>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <MainLayout>
-              <Home />
-            </MainLayout>
-          </Route>
-          <Route path="/sign-in">
-            <LoginLayout>
-              <SignIn />
-            </LoginLayout>
-          </Route>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <MainLayout>
+                <Home />
+              </MainLayout>
+            </Route>
+            <Route path="/sign-in">
+              <LoginLayout>
+                <SignIn />
+              </LoginLayout>
+            </Route>
 
-          <Route path="/sign-up">
-            <LoginLayout>
-              <SignUp />
-            </LoginLayout>
-          </Route>
-          <Route path="/add-product">
-            <MainLayout>
-              <AddProduct />
-            </MainLayout>
-          </Route>
-          <Route path="/account-page">
-            <MainLayout>
-              <AccountPage />
-            </MainLayout>
-          </Route>
-          <Route path="/ItemDetailPage/:id">
-            <MainLayout>
-              <ProductDetailPage />
-            </MainLayout>
-          </Route>
-        </Switch>
-      </Router>
+            <Route path="/sign-up">
+              <LoginLayout>
+                <SignUp />
+              </LoginLayout>
+            </Route>
+            <Route path="/add-product">
+              <MainLayout>
+                <AddProduct />
+              </MainLayout>
+            </Route>
+            <Route path="/account-page">
+              <MainLayout>
+                <AccountPage />
+              </MainLayout>
+            </Route>
+            <Route path="/ItemDetailPage/:id">
+              <MainLayout>
+                <ProductDetailPage />
+              </MainLayout>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>
     </div>
   );
 }

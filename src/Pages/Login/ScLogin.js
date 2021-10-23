@@ -1,5 +1,5 @@
 import Styled from "styled-components";
-import loginImage from "../Assets/Group52.png";
+import loginImage from "../../assets/Group52.png";
 
 export const LoginPageWrapper = Styled.div`
         display: flex;

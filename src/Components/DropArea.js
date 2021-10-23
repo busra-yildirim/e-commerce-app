@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import uploadImage from "../Assets/Group 6911.svg";
-import { Product } from "./ScAddProduct";
+import uploadImage from "../assets/Group 6911.svg";
+import { Product } from "../Pages/AddProduct/ScAddProduct";
 
 const DropArea = () => {
   const [data, setData] = useState(false);
@@ -38,6 +38,19 @@ const DropArea = () => {
     e.preventDefault();
   };
 
+  const [imgData, setImgData] = useState(null);
+  const onChangePicture = (e) => {
+    if (e.target.files[0]) {
+      console.log("picture: ", e.target.files);
+      //setPicture(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgData(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   /*err && <p>{err}</p>*/
 
   return (
@@ -48,16 +61,23 @@ const DropArea = () => {
     >
       <div>Ürün Görseli</div>
 
-      {!data && (
+      {!data && !imgData && (
         <div className="uploadFile">
           <img src={uploadImage} alt="" />
           <span>Sürükleyip bırakarak yükle</span>
           <span>veya</span>
-          <div className="selectImage">Görsel Seçin</div>
+          <input type="file" onClick={onChangePicture} />
           <span>PNG ve JPEG Dosya boyutu: max. 100kb</span>
         </div>
       )}
-
+      {imgData && (
+        <div className="imageWrapper">
+          <img src={imgData} className="uploadedImage" alt="" />
+          <div className="remove" onClick={() => setImgData(null)}>
+            x
+          </div>
+        </div>
+      )}
       {data && (
         <div className="imageWrapper">
           <img src={data} className="uploadedImage" alt="" />
