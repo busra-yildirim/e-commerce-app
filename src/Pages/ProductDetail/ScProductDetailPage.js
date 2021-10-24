@@ -78,6 +78,13 @@ export const GivenOffer = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
+  gap: 5px;
+  .offer {
+    width: 70px;
+    height: 20px;
+    font: normal normal bold 15px/20px Nunito;
+    color: #525252;
+  }
 `;
 export const ProductProperty = styled.div`
   display: flex;

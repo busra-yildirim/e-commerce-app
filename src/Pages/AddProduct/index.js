@@ -9,13 +9,41 @@ import {
 } from "./ScAddProduct";
 
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import DropArea from "../../components/DropArea";
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [color, setColor] = useState([]);
   const [brand, setBrand] = useState([]);
   const [status, setStatus] = useState([]);
+  const productName = useRef(null);
+  /* const [newProduct, setNewProduct] = useState({
+    brand: {
+      id: "",
+      title: "",
+    },
+    category: {
+      id: "",
+      title: "",
+    },
+    color: {
+      id: "",
+      title: "",
+    },
+    description: "",
+    id: "",
+    imageUrl: "",
+    isOfferable: true,
+    isSold: false,
+    owner: "",
+    price: null,
+    status: {
+      id: "",
+      title: "",
+    },
+    title: "",
+  });
+*/
   useEffect(() => {
     axios
       .get("https://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
@@ -62,7 +90,6 @@ const AddProduct = () => {
             height="45px"
             width="730px"
             maxLength="100"
-            s
           />
           <ProductLabel>Açıklama</ProductLabel>
           <ProductInput

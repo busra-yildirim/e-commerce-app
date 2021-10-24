@@ -1,43 +1,37 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { ProductContainer } from "./ScProducts";
 import ProductItem from "./ProductItem";
 import { getSessionStorageSelectedCategory } from "../utils/index.js";
-import { useDispatch } from "react-redux";
-import { products } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProducts, filterProducts } from "../actions";
 
-const Products = ({ allCategories, selectedCategory }) => {
-  const getSelectedCategory = getSessionStorageSelectedCategory();
-  const [allProducts, setAllProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
+const Products = ({ selectedCategory }) => {
+  const getSelectedCategory = getSessionStorageSelectedCategory(); // selected category by user
+  const products = useSelector((state) => state.products);
+  const filteredToProducts = useSelector((state) => state.filteredProducts);
   const dispatch = useDispatch();
 
-  console.log("selected", selectedCategory.toLowerCase());
   useEffect(() => {
-    axios
-      .get("http://bootcampapi.techcs.io/api/fe/v1/product/all")
-      .then((response) => {
-        console.log("products-test", response.data);
-        setAllProducts(response.data);
-        setFilteredProducts(response.data);
-        dispatch(products(allProducts));
-
-        if (getSelectedCategory !== "Hepsi") {
-          const filteredProducts = allProducts.filter(
-            (item) => item.category.title === getSelectedCategory.toLowerCase()
-          );
-          setFilteredProducts(filteredProducts);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (products.length === 0) {
+      dispatch(fetchAllProducts());
+    }
+  }, [dispatch]);
+  console.log("products", products);
+  useEffect(() => {
+    console.log("getSelectedCategory", getSelectedCategory);
+    if (getSelectedCategory !== "Hepsi") {
+      const filteredProducts = products.filter(
+        (item) => item.category.title === getSelectedCategory.toLowerCase()
+      );
+      dispatch(filterProducts(filteredProducts));
+    } else {
+      dispatch(filterProducts(products));
+    }
   }, [selectedCategory]);
-  console.log("filteredProducts", filteredProducts);
+  console.log("filteredProducts", filteredToProducts);
   return (
     <ProductContainer>
-      {filteredProducts.map((item) => (
+      {filteredToProducts.map((item) => (
         <ProductItem key={item.id} products={item} />
       ))}
     </ProductContainer>

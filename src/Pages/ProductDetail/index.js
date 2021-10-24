@@ -12,6 +12,8 @@ import {
 import OfferModal from "../../components/modals/Offer/OfferModal";
 import BuyProduct from "../../components/modals/Buying/BuyProduct";
 import checkIcon from "../../assets/Group 6792.svg";
+import { buyToProduct, selected } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -21,15 +23,20 @@ const ProductDetailPage = () => {
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   const [notifyText, setNotifyText] = useState("");
   const [showNotify, setShowNotify] = useState(false);
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.products);
+  const offer = useSelector((state) => state.offer);
+
   useEffect(() => {
     axios
       .get(`http://bootcampapi.techcs.io/api/fe/v1/product/${id}`)
       .then((response) => {
-        console.log("test", response.data);
+        console.log("selected-Product", response.data);
         setSelectedProduct(response.data);
+        dispatch(selected(response.data));
       });
   }, []);
-
+  console.log("offer", offer);
   const openModal = () => {
     setIsOpen(true);
   };
@@ -46,7 +53,20 @@ const ProductDetailPage = () => {
     if (isClicked) {
       setIsOpenBuyingModal(false);
       setNotifyText("Satın Alındı");
+      setSelectedProduct((prev) => ({ ...prev, isSold: true }));
+
+      const products2 = allProducts.map((item) => {
+        // console.log("test2", item);
+        //   console.log("selectedProduct", selectedProduct);
+        /*  if (item.id === selectedProduct.id) {
+          console.log("test3");
+          item.isSold = true;
+        }*/
+        return item;
+      });
+      dispatch(buyToProduct(products2));
       setShowNotify(true);
+      console.log("test2", products2);
     }
   };
 
@@ -77,8 +97,11 @@ const ProductDetailPage = () => {
             Bu Ürün Satışta Değil
           </DetailButton>
         )}
-        {!selectedProduct.isSold && selectedProduct.isOfferable ? (
-          <GivenOffer>Verilen Teklif:</GivenOffer>
+        {!selectedProduct.isSold ? (
+          <GivenOffer>
+            <div>Verilen Teklif: </div>
+            <div className="offer">{offer} TL</div>
+          </GivenOffer>
         ) : (
           ""
         )}

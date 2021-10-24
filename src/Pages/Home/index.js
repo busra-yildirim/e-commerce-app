@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import Products from "../../components/Products";
 //import { getToken } from "../../services/service";
 import { setSessionStorageSelectedCategory } from "../../utils/index.js";
+
 const Home = () => {
   //const token = getToken();
   const [allCategories, setAllCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("Hepsi");
+  const [selectedCategory, setSelectedCategory] = useState(null);
   // const config = {
   //       headers: { Authorization: `Bearer ${token}` }
   // };
+
   useEffect(() => {
     axios
       .get("http://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
@@ -19,7 +21,6 @@ const Home = () => {
           title: "Hepsi",
           id: "all",
         });
-
         setAllCategories(response.data);
       })
       .catch((error) => {
@@ -38,10 +39,7 @@ const Home = () => {
           <CategoryTitle key={item.id}> {item.title} </CategoryTitle>
         ))}
       </CategoryTitleWrapper>
-      <Products
-        allCategories={allCategories}
-        selectedCategory={selectedCategory}
-      />
+      <Products selectedCategory={selectedCategory} />
     </>
   );
 };

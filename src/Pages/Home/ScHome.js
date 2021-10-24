@@ -70,9 +70,14 @@ export const CategoryTitleWrapper = Styled.div`
     border-bottom: 1px solid #eaeaea;
     margin-bottom: 20px;
     color: #525252;
+ 
 
 `;
 export const CategoryTitle = Styled.div`
    
    text-transform: capitalize;
+   &:active {
+    color: #4B9CE2;
+    border-bottom: 1px solid #4B9CE2;
+    }
 `;

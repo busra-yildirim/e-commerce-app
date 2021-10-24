@@ -21,6 +21,13 @@ const BuyProduct = ({ closeBuyingModal }) => {
           >
             Onayla
           </ConfirmButton>
+          {/*<ConfirmButton
+            color="#FFFFFF"
+            backgroundColor="#4B9CE2"
+            onClick={() => closeBuyingModal(true)}
+          >
+            Satın Al
+          </ConfirmButton>*/}
         </div>
       </div>
     </Modal>

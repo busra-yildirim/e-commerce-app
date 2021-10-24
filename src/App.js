@@ -7,11 +7,13 @@ import MainLayout from "./layouts/MainLayout";
 import AddProduct from "./Pages/AddProduct";
 import AccountPage from "./Pages/AccountPage";
 import ProductDetailPage from "./Pages/ProductDetail";
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import thunk from "redux-thunk";
+
 function App() {
-  const store = createStore(reducer);
+  const store = createStore(reducer, applyMiddleware(thunk));
   return (
     <div>
       <Provider store={store}>
