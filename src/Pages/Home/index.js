@@ -1,21 +1,17 @@
-import axios from "axios";
 import { ContainerImage, CategoryTitle, CategoryTitleWrapper } from "./ScHome";
 import { useState, useEffect } from "react";
 import Products from "../../components/Products";
-//import { getToken } from "../../services/service";
+
 import { setSessionStorageSelectedCategory } from "../../utils/index.js";
+import { api } from "../../api";
 
 const Home = () => {
-  //const token = getToken();
   const [allCategories, setAllCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // const config = {
-  //       headers: { Authorization: `Bearer ${token}` }
-  // };
 
   useEffect(() => {
-    axios
-      .get("http://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
+    api
+      .get("/detail/category/all")
       .then((response) => {
         response.data.unshift({
           title: "Hepsi",
@@ -24,7 +20,7 @@ const Home = () => {
         setAllCategories(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }, []);
   const filteredToCategory = (event) => {

@@ -15,11 +15,10 @@ const Products = ({ selectedCategory }) => {
     if (products.length === 0) {
       dispatch(fetchAllProducts());
     }
-  }, [dispatch]);
-  console.log("products", products);
+  }, [products.length, dispatch]);
+
   useEffect(() => {
-    console.log("getSelectedCategory", getSelectedCategory);
-    if (getSelectedCategory !== "Hepsi") {
+    if (getSelectedCategory && getSelectedCategory !== "Hepsi") {
       const filteredProducts = products.filter(
         (item) => item.category.title === getSelectedCategory.toLowerCase()
       );
@@ -27,8 +26,7 @@ const Products = ({ selectedCategory }) => {
     } else {
       dispatch(filterProducts(products));
     }
-  }, [selectedCategory]);
-  console.log("filteredProducts", filteredToProducts);
+  }, [getSelectedCategory, selectedCategory, products, dispatch]);
   return (
     <ProductContainer>
       {filteredToProducts.map((item) => (

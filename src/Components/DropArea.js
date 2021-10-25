@@ -10,7 +10,7 @@ const DropArea = () => {
     const {
       dataTransfer: { files },
     } = e;
-    console.log("Files: ", files);
+
     const { length } = files;
     const reader = new FileReader();
     if (length === 0) {
@@ -41,7 +41,6 @@ const DropArea = () => {
   const [imgData, setImgData] = useState(null);
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      console.log("picture: ", e.target.files);
       //setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {

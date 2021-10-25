@@ -8,74 +8,64 @@ import {
   ProductInput,
 } from "./ScAddProduct";
 
-import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import DropArea from "../../components/DropArea";
+import { api } from "../../api";
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [color, setColor] = useState([]);
   const [brand, setBrand] = useState([]);
   const [status, setStatus] = useState([]);
-  const productName = useRef(null);
-  /* const [newProduct, setNewProduct] = useState({
-    brand: {
-      id: "",
-      title: "",
-    },
-    category: {
-      id: "",
-      title: "",
-    },
-    color: {
-      id: "",
-      title: "",
-    },
-    description: "",
-    id: "",
-    imageUrl: "",
-    isOfferable: true,
-    isSold: false,
-    owner: "",
-    price: null,
-    status: {
-      id: "",
-      title: "",
-    },
-    title: "",
-  });
-*/
+
+  api
+    .post("/product/create", {
+      price: 0,
+      imageUrl: "string",
+      title: "string",
+      status: {
+        title: "string",
+        id: "string",
+      },
+      color: {
+        title: "string",
+        id: "string",
+      },
+      brand: {
+        title: "string",
+        id: "string",
+      },
+      category: {
+        title: "string",
+        id: "string",
+      },
+      description: "string",
+      isOfferable: true,
+    })
+    .then((response) => {})
+    .catch((error) => alert("error"));
+
   useEffect(() => {
-    axios
-      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/category/all")
-      .then((response) => {
-        setCategories(response.data);
-      });
+    api.get("/detail/category/all").then((response) => {
+      setCategories(response.data);
+    });
   }, []);
   useEffect(() => {
-    axios
-      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/color/all")
-      .then((response) => {
-        setColor(response.data);
-      });
+    api.get("/detail/color/all").then((response) => {
+      setColor(response.data);
+    });
   }, []);
   useEffect(() => {
-    axios
-      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/brand/all")
-      .then((response) => {
-        setBrand(response.data);
-      });
+    api.get("/detail/brand/all").then((response) => {
+      setBrand(response.data);
+    });
   }, []);
   useEffect(() => {
-    axios
-      .get("https://bootcampapi.techcs.io/api/fe/v1/detail/status/all")
-      .then((response) => {
-        setStatus(response.data);
-      });
+    api.get("/detail/status/all").then((response) => {
+      setStatus(response.data);
+    });
   }, []);
 
-  const handleSubmit = () => {
-    console.log("tıklandı");
-  };
+  const handleSubmit = () => {};
   return (
     <AddProductWrapper>
       <FormProduct onClick={handleSubmit}>

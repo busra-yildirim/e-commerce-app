@@ -14,7 +14,6 @@ const HeaderLayout = () => {
   let history = useHistory();
   const token = getToken();
 
-  console.log({ token });
   return (
     <HeaderWrapper>
       <Container>

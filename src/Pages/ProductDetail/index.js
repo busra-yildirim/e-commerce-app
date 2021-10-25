@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
@@ -12,8 +11,9 @@ import {
 import OfferModal from "../../components/modals/Offer/OfferModal";
 import BuyProduct from "../../components/modals/Buying/BuyProduct";
 import checkIcon from "../../assets/Group 6792.svg";
-import { buyToProduct, selected } from "../../actions";
+import { selected } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import { api } from "../../api";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -24,23 +24,23 @@ const ProductDetailPage = () => {
   const [notifyText, setNotifyText] = useState("");
   const [showNotify, setShowNotify] = useState(false);
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.products);
+  const [currentOfferID, setCurrentOfferID] = useState(null);
   const offer = useSelector((state) => state.offer);
 
   useEffect(() => {
-    axios
-      .get(`http://bootcampapi.techcs.io/api/fe/v1/product/${id}`)
-      .then((response) => {
-        console.log("selected-Product", response.data);
-        setSelectedProduct(response.data);
-        dispatch(selected(response.data));
-      });
-  }, []);
-  console.log("offer", offer);
+    api.get(`/product/${id}`).then((response) => {
+      setSelectedProduct(response.data);
+      dispatch(selected(response.data));
+    });
+  }, [dispatch, id]);
+
   const openModal = () => {
     setIsOpen(true);
   };
-  const closeModal = () => {
+  const closeModal = (offerID) => {
+    if (offerID) {
+      setCurrentOfferID(offerID);
+    }
     setIsOpen(false);
   };
 
@@ -52,22 +52,25 @@ const ProductDetailPage = () => {
     setIsOpenBuyingModal(false);
     if (isClicked) {
       setIsOpenBuyingModal(false);
-      setNotifyText("Satın Alındı");
-      setSelectedProduct((prev) => ({ ...prev, isSold: true }));
 
-      const products2 = allProducts.map((item) => {
-        // console.log("test2", item);
-        //   console.log("selectedProduct", selectedProduct);
-        /*  if (item.id === selectedProduct.id) {
-          console.log("test3");
-          item.isSold = true;
-        }*/
-        return item;
-      });
-      dispatch(buyToProduct(products2));
-      setShowNotify(true);
-      console.log("test2", products2);
+      api
+        .put(`/product/purchase/${selectedProduct.id}`)
+        .then((response) => {
+          setNotifyText("Satın Alındı");
+          setSelectedProduct((prev) => ({ ...prev, isSold: true }));
+          setShowNotify(true);
+        })
+        .catch((error) => alert("Cannot purchase your own product!"));
     }
+  };
+
+  const cancelOffer = () => {
+    api
+      .delete(`/account/cancel-offer/${currentOfferID}`)
+      .then((response) => {
+        setSelectedProduct((prev) => ({ ...prev, isOfferable: true }));
+      })
+      .catch((error) => alert("Offer not found!"));
   };
 
   return (
@@ -100,7 +103,11 @@ const ProductDetailPage = () => {
         {!selectedProduct.isSold ? (
           <GivenOffer>
             <div>Verilen Teklif: </div>
-            <div className="offer">{offer} TL</div>
+            {!selectedProduct.isOfferable ? (
+              <div className="offer">{offer} TL</div>
+            ) : (
+              ""
+            )}
           </GivenOffer>
         ) : (
           ""
@@ -126,7 +133,7 @@ const ProductDetailPage = () => {
               <DetailButton
                 color="#4B9CE2"
                 background="#F0F8FF"
-                onClick={openModal}
+                onClick={cancelOffer}
               >
                 Teklif Geri Çek
               </DetailButton>

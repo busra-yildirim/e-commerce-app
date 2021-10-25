@@ -8,19 +8,21 @@ import {
   FormSpan,
   Form,
 } from "../ScLogin";
-import axios from "axios";
+
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { setToken, setUserInfo } from "../../../utils";
+import { api } from "../../../api";
 
 const SignUp = () => {
   let history = useHistory();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+
   const handleClick = (event) => {
     event.preventDefault();
-    axios
-      .post("http://bootcampapi.techcs.io/api/fe/v1/authorization/signup", {
+    api
+      .post("/authorization/signup", {
         email: email,
         password: password,
       })
@@ -28,12 +30,9 @@ const SignUp = () => {
         setToken(response.data.access_token);
         setUserInfo(email);
         history.push("/");
-        console.log(response.data);
-        console.log("email", email);
-        console.log("password", password);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
   return (

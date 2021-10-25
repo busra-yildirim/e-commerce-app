@@ -11,34 +11,31 @@ import {
 } from "../ScLogin";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+
 import { setToken, setUserInfo } from "../../../utils";
 import errorIcon from "../../../assets/errorIcon.svg";
-
+import { api } from "../../../api";
 const SignIn = () => {
   let history = useHistory();
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
   const [notifyText, setNotifyText] = useState("");
   const [isError, setIsError] = useState(false);
+
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("email", emailInput.current.value);
-    console.log("passwordInput", passwordInput.current.value);
-
-    axios
-      .post("https://bootcampapi.techcs.io/api/fe/v1/authorization/signin", {
+    api
+      .post("/authorization/signin", {
         email: emailInput.current.value,
         password: passwordInput.current.value,
       })
       .then((response) => {
-        console.log(response.data);
         setToken(response.data.access_token);
         setUserInfo(emailInput.current.value);
         history.push("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
         setIsError(true);
         setNotifyText("Emailinizi veya şifreniz hatalı.");
       });

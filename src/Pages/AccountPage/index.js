@@ -15,16 +15,34 @@ import BuyProduct from "../../components/modals/Buying/BuyProduct";
 import { useState } from "react";
 import checkIcon from "../../assets/Group 6792.svg";
 import { useSelector } from "react-redux";
+import { api } from "../../api";
 
 const AccountPage = () => {
   const userEmail = getUserInfo();
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
   const [notifyText, setNotifyText] = useState("");
-  const selectedProduct = useSelector((state) => state.selectedProducts);
-  const giveOffer = useSelector((state) => state.giveOffer);
+  // const selectedProduct = useSelector((state) => state.selectedProducts);
+
   const offer = useSelector((state) => state.offer);
   const [isGetOfferTab, setIsGetOfferTab] = useState(true);
+
+  const [givenOffers, setGivenOffers] = useState(null);
+  const [receivedOffers, setReceivedOffers] = useState(null);
+
+  api
+    .get("/account/given-offers")
+    .then((response) => {
+      setGivenOffers(response.data);
+    })
+    .catch((error) => alert(error));
+
+  api
+    .get("/account/received-offers")
+    .then((response) => {
+      setReceivedOffers(response.data);
+    })
+    .catch((error) => alert(error));
 
   const openBuyingModal = () => {
     setIsOpenBuyingModal(true);
@@ -32,16 +50,15 @@ const AccountPage = () => {
   const closeBuyingModal = (isClicked) => {
     setIsOpenBuyingModal(false);
     setShowNotify(false);
+
     if (isClicked) {
       setNotifyText("Satın Alındı");
       setShowNotify(true);
     }
   };
   const handleGetAndGiveOffer = (isClicked) => {
-    console.log("tıklandı");
     setIsGetOfferTab(isClicked);
   };
-  console.log("giveOffer", giveOffer);
   return (
     <AccountPageWrapper>
       <Account>
@@ -65,28 +82,29 @@ const AccountPage = () => {
             Teklif Verdiklerim
           </OfferTab>
         </div>
-        {isGetOfferTab ? (
-          <ProductCard>
-            <div className="productWrapper">
-              <ProductImage src={selectedProduct.imageUrl} alt="" />
+        {isGetOfferTab
+          ? receivedOffers.map((item) => (
+              <ProductCard>
+                <div className="productWrapper">
+                  <ProductImage src={item.imageUrl} alt="" />
 
-              <div className="titleGivenOfferWrapper">
-                <div className="productTitle">{selectedProduct.title}</div>
-                <GivenOffer background="">
-                  <div>Verilen Teklif: </div>
-                  <div className="offer">{offer} TL</div>
-                </GivenOffer>
-              </div>
-            </div>
+                  <div className="titleGivenOfferWrapper">
+                    <div className="productTitle">{item.title}</div>
+                    <GivenOffer background="">
+                      <div>Verilen Teklif: </div>
+                      <div className="offer">{offer} TL</div>
+                    </GivenOffer>
+                  </div>
+                </div>
 
-            <StatusButton
-              background=" #4B9CE2"
-              color="#FFFFFF"
-              onClick={openBuyingModal}
-            >
-              Onayla
-            </StatusButton>
-            {/*<StatusButton background="#F77474" color="#FFFFFF">
+                <StatusButton
+                  background=" #4B9CE2"
+                  color="#FFFFFF"
+                  onClick={openBuyingModal}
+                >
+                  Onayla
+                </StatusButton>
+                {/*<StatusButton background="#F77474" color="#FFFFFF">
     Reddet
   </StatusButton>
   <StatusButton background=" #4B9CE2" color="#FFFFFF">
@@ -98,29 +116,29 @@ const AccountPage = () => {
   <StatusButton background="#FFFFFF" color="#F77474">
     Reddedildi
   </StatusButton>*/}
-          </ProductCard>
-        ) : (
-          <ProductCard>
-            <div className="productWrapper">
-              <ProductImage src={selectedProduct.imageUrl} alt="" />
+              </ProductCard>
+            ))
+          : givenOffers.map((item) => (
+              <ProductCard>
+                <div className="productWrapper">
+                  <ProductImage src={item.imageUrl} alt="" />
+                  <div className="titleGivenOfferWrapper">
+                    <div className="productTitle">{item.title}</div>
+                    <GivenOffer background="">
+                      <div>Verilen Teklif: </div>
+                      <div className="offer">{offer} TL</div>
+                    </GivenOffer>
+                  </div>
+                </div>
 
-              <div className="titleGivenOfferWrapper">
-                <div className="productTitle">{selectedProduct.title}</div>
-                <GivenOffer background="">
-                  <div>Verilen Teklif: </div>
-                  <div className="offer">{offer} TL</div>
-                </GivenOffer>
-              </div>
-            </div>
-
-            <StatusButton
-              background=" #4B9CE2"
-              color="#FFFFFF"
-              onClick={openBuyingModal}
-            >
-              Onayla
-            </StatusButton>
-            {/*<StatusButton background="#F77474" color="#FFFFFF">
+                <StatusButton
+                  background=" #4B9CE2"
+                  color="#FFFFFF"
+                  onClick={openBuyingModal}
+                >
+                  Onayla
+                </StatusButton>
+                {/*<StatusButton background="#F77474" color="#FFFFFF">
   Reddet
 </StatusButton>
 <StatusButton background=" #4B9CE2" color="#FFFFFF">
@@ -132,8 +150,8 @@ const AccountPage = () => {
 <StatusButton background="#FFFFFF" color="#F77474">
   Reddedildi
 </StatusButton>*/}
-          </ProductCard>
-        )}
+              </ProductCard>
+            ))}
       </OfferWrapper>
       {isOpenBuyingModal && <BuyProduct closeBuyingModal={closeBuyingModal} />}
       {showNotify && (

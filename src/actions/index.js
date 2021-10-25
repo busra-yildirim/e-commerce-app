@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../api";
 
 // seçilen kategoriye göre filtreli görünücek
 export const products = (products) => {
@@ -49,6 +49,7 @@ export const newOffer = (newOffer) => {
     payload: newOffer,
   };
 };
+
 // teklif verilen ürün teklif verdiklerime düşücek
 export const getOffer = (getOffer) => {
   return {
@@ -57,11 +58,8 @@ export const getOffer = (getOffer) => {
   };
 };
 export const fetchAllProducts = () => async (dispatch) => {
-  return axios
-    .get("http://bootcampapi.techcs.io/api/fe/v1/product/all")
-    .then((response) => {
-      console.log("products-test", response.data);
-      dispatch(products(response.data));
-      dispatch(filterProducts(response.data));
-    });
+  return api.get("/product/all").then((response) => {
+    dispatch(products(response.data));
+    dispatch(filterProducts(response.data));
+  });
 };

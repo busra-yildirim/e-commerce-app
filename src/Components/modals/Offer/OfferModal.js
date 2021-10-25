@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { giveOffer, newOffer } from "../../../actions";
 import { useDispatch } from "react-redux";
 
+import { api } from "../../../api";
+
 const OfferModal = ({ closeModal }) => {
   //<img src={checkImage} alt="" />
   const [isClick, setIsClicked] = useState(false);
@@ -20,18 +22,21 @@ const OfferModal = ({ closeModal }) => {
     const currentPrice = selectedProduct.price;
     const calculateOfferPrice = currentPrice + currentPrice * (percent / 100);
     setOffer(calculateOfferPrice);
-    console.log("calculateOfferPrice", calculateOfferPrice);
-    console.log("offer", offer);
     dispatch(newOffer(offer));
-    // setIsClicked(false);
   };
 
   const handleOffer = () => {
     selectedProduct.isOfferable = false;
-    console.log("offer", selectedProduct.isOfferable);
-    console.log("tıklandı");
     dispatch(giveOffer(selectedProduct));
-    closeModal();
+
+    api
+      .post(`/product/offer/${selectedProduct.id}`, {
+        offeredPrice: offer,
+      })
+      .then((response) => {
+        closeModal(response.data.id);
+      })
+      .catch((error) => alert("You have an offer for this product already!"));
   };
   return (
     <ModalWrapper>
