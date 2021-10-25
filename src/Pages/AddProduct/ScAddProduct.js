@@ -146,7 +146,7 @@ export const OptionProduct = styled.option`
     border-radius: 10px;
   }
 `;
-export const FormProduct = styled.div`
+export const FormProduct = styled.form`
   display: flex;
   width: 1480px;
   height: 812px;

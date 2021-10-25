@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { api } from "../api";
 import uploadImage from "../assets/Group 6911.svg";
 import { Product } from "../Pages/AddProduct/ScAddProduct";
 
-const DropArea = () => {
+const DropArea = ({ changeImageUrl }) => {
   const [data, setData] = useState(false);
   const [err, setErr] = useState(false);
   const onDrop = (e) => {
@@ -10,7 +11,6 @@ const DropArea = () => {
     const {
       dataTransfer: { files },
     } = e;
-
     const { length } = files;
     const reader = new FileReader();
     if (length === 0) {
@@ -33,25 +33,30 @@ const DropArea = () => {
     reader.onload = (loadEvt) => {
       setData(loadEvt.target.result);
     };
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    api.post("/file/upload/image", formData).then((response) => {
+      changeImageUrl(response.data.url);
+    });
   };
   const onDragOver = (e) => {
     e.preventDefault();
   };
-
   const [imgData, setImgData] = useState(null);
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      //setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
+      const formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      api.post("/file/upload/image", formData).then((response) => {
+        changeImageUrl(response.data.url);
+      });
     }
   };
-
-  /*err && <p>{err}</p>*/
-
   return (
     <Product
       flex="4"
@@ -59,13 +64,12 @@ const DropArea = () => {
       onDragOver={(e) => onDragOver(e)}
     >
       <div>Ürün Görseli</div>
-
       {!data && !imgData && (
         <div className="uploadFile">
           <img src={uploadImage} alt="" />
           <span>Sürükleyip bırakarak yükle</span>
           <span>veya</span>
-          <input type="file" onClick={onChangePicture} />
+          <input type="file" onChange={onChangePicture} />
           <span>PNG ve JPEG Dosya boyutu: max. 100kb</span>
         </div>
       )}

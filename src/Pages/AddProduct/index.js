@@ -16,34 +16,13 @@ const AddProduct = () => {
   const [color, setColor] = useState([]);
   const [brand, setBrand] = useState([]);
   const [status, setStatus] = useState([]);
-
+  const [imageUrl, setImageUrl] = useState(null);
+  /*
   api
-    .post("/product/create", {
-      price: 0,
-      imageUrl: "string",
-      title: "string",
-      status: {
-        title: "string",
-        id: "string",
-      },
-      color: {
-        title: "string",
-        id: "string",
-      },
-      brand: {
-        title: "string",
-        id: "string",
-      },
-      category: {
-        title: "string",
-        id: "string",
-      },
-      description: "string",
-      isOfferable: true,
-    })
+    .post("/product/create", )
     .then((response) => {})
     .catch((error) => alert("error"));
-
+*/
   useEffect(() => {
     api.get("/detail/category/all").then((response) => {
       setCategories(response.data);
@@ -65,13 +44,40 @@ const AddProduct = () => {
     });
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { productName, productDescription, brand, status, color, price } =
+      event.target;
+    const payload = {
+      price: price,
+      imageUrl: imageUrl,
+      title: productName.value,
+      status: {
+        title: status,
+        id: "string",
+      },
+      color: {
+        title: color,
+        id: "string",
+      },
+      brand: {
+        title: brand,
+        id: "string",
+      },
+      category: {
+        title: "string",
+        id: "string",
+      },
+      description: productDescription.value,
+      isOfferable: true,
+    };
+    console.log("payload", payload);
+  };
   return (
     <AddProductWrapper>
-      <FormProduct onClick={handleSubmit}>
+      <FormProduct onSubmit={handleSubmit}>
         <Product flex="5">
           <div> Ürün Detayları </div>
-
           <ProductLabel>Ürün Adı</ProductLabel>
           <ProductInput
             type="text"
@@ -80,6 +86,7 @@ const AddProduct = () => {
             height="45px"
             width="730px"
             maxLength="100"
+            name="productName"
           />
           <ProductLabel>Açıklama</ProductLabel>
           <ProductInput
@@ -89,6 +96,7 @@ const AddProduct = () => {
             height="92px"
             width="730px"
             maxLength="500"
+            name="productDescription"
           />
           <div className="Select">
             <div className="SelectWrapper">
@@ -98,7 +106,9 @@ const AddProduct = () => {
                   Kategori seç
                 </OptionProduct>
                 {categories.map((item) => (
-                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                  <OptionProduct key={item.id} name="category">
+                    {item.title}
+                  </OptionProduct>
                 ))}
               </SelectProduct>
             </div>
@@ -109,7 +119,9 @@ const AddProduct = () => {
                   Marka seç
                 </OptionProduct>
                 {brand.map((item) => (
-                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                  <OptionProduct key={item.id} name="brand">
+                    {item.title}
+                  </OptionProduct>
                 ))}
               </SelectProduct>
             </div>
@@ -120,7 +132,9 @@ const AddProduct = () => {
                   Renk seç
                 </OptionProduct>
                 {color.map((item) => (
-                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                  <OptionProduct key={item.id} name="color">
+                    {item.title}
+                  </OptionProduct>
                 ))}
               </SelectProduct>
             </div>
@@ -131,7 +145,9 @@ const AddProduct = () => {
                   Kullanım durumu seç
                 </OptionProduct>
                 {status.map((item) => (
-                  <OptionProduct key={item.id}>{item.title}</OptionProduct>
+                  <OptionProduct key={item.id} name="status">
+                    {item.title}
+                  </OptionProduct>
                 ))}
               </SelectProduct>
             </div>
@@ -143,14 +159,14 @@ const AddProduct = () => {
                 required
                 height="45px"
                 width="236px"
+                name="price"
               />
               <ProductLabel>Teklif opsiyonu</ProductLabel>
               <input type="radio" />
             </div>
           </div>
         </Product>
-
-        <DropArea />
+        <DropArea changeImageUrl={setImageUrl} />
         <button type="submit" className="saveButton">
           Kaydet
         </button>
