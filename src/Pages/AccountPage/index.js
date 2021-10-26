@@ -22,11 +22,8 @@ const AccountPage = () => {
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
   const [notifyText, setNotifyText] = useState("");
-  // const selectedProduct = useSelector((state) => state.selectedProducts);
-
   const offer = useSelector((state) => state.offer);
   const [isGetOfferTab, setIsGetOfferTab] = useState(true);
-
   const [givenOffers, setGivenOffers] = useState(null);
   const [receivedOffers, setReceivedOffers] = useState(null);
 
@@ -36,7 +33,6 @@ const AccountPage = () => {
       setGivenOffers(response.data);
     })
     .catch((error) => alert(error));
-
   api
     .get("/account/received-offers")
     .then((response) => {
@@ -96,7 +92,6 @@ const AccountPage = () => {
                     </GivenOffer>
                   </div>
                 </div>
-
                 <StatusButton
                   background=" #4B9CE2"
                   color="#FFFFFF"
@@ -130,7 +125,6 @@ const AccountPage = () => {
                     </GivenOffer>
                   </div>
                 </div>
-
                 <StatusButton
                   background=" #4B9CE2"
                   color="#FFFFFF"

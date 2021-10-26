@@ -11,10 +11,10 @@ import {
 } from "../ScLogin";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import { setToken, setUserInfo } from "../../../utils";
 import errorIcon from "../../../assets/errorIcon.svg";
 import { api } from "../../../api";
+
 const SignIn = () => {
   let history = useHistory();
   const emailInput = useRef(null);

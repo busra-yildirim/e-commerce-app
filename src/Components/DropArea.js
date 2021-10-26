@@ -6,6 +6,7 @@ import { Product } from "../Pages/AddProduct/ScAddProduct";
 const DropArea = ({ changeImageUrl }) => {
   const [data, setData] = useState(false);
   const [err, setErr] = useState(false);
+
   const onDrop = (e) => {
     e.preventDefault();
     const {
@@ -23,8 +24,8 @@ const DropArea = ({ changeImageUrl }) => {
       setErr("File format must be either png or jpg");
       return false;
     }
-    if (size / 1024 / 1024 > 2) {
-      setErr("File size exceeded the limit of 100kb");
+    if (size / 100 / 100 > 2) {
+      setErr("File size exceeded the limit of 100KB");
       return false;
     }
     setErr(false);

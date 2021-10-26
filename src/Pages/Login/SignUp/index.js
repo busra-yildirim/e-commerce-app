@@ -8,7 +8,6 @@ import {
   FormSpan,
   Form,
 } from "../ScLogin";
-
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { setToken, setUserInfo } from "../../../utils";

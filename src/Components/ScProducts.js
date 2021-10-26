@@ -13,11 +13,8 @@ height: 392px;
 `;
 
 export const ProductImage = Styled.img`
-
-  
     width: 100%;
     height: 100%;
-   
 `;
 
 export const ProductContainer = Styled.div`
@@ -27,7 +24,6 @@ export const ProductContainer = Styled.div`
     flex-wrap: wrap;
     gap: 20px 20px;
     width: 100%;
-
 `;
 export const ProductBrand = Styled.div`
     display: flex;
@@ -35,9 +31,7 @@ export const ProductBrand = Styled.div`
     color: #4B9CE2;
     text-transform: capitalize;
     width: 39px;
-    height: 20px;
-  
-   
+    height: 20px; 
 `;
 
 export const ProductColor = Styled.div`

@@ -83,7 +83,6 @@ export const ProductCard = styled.div`
     }
   }
 `;
-
 export const ProductImage = styled.img`
   width: 78px;
   height: 84px;

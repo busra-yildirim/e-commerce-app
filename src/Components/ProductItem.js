@@ -9,12 +9,7 @@ import {
 } from "./ScProducts";
 import { useHistory } from "react-router-dom";
 const ProductItem = ({ products }) => {
-  /*
-    <div>Product brand solda</div>
-  <div>Product renk sağda</div>
-  <div>fiyat</div> */
   let history = useHistory();
-
   const handleClickedProduct = () => {
     history.push("/ItemDetailPage/" + products.id);
   };
@@ -30,7 +25,6 @@ const ProductItem = ({ products }) => {
           {products.color.title}
         </ProductColor>
       </BrandAndColorWrapper>
-
       <ProductPrice>{products.price} TL</ProductPrice>
     </ProductWrapper>
   );

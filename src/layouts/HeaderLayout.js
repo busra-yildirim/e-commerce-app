@@ -18,7 +18,12 @@ const HeaderLayout = () => {
     <HeaderWrapper>
       <Container>
         <Header>
-          <AppImage src={appImage} width="100px" height="50px" />
+          <AppImage
+            src={appImage}
+            width="100px"
+            height="50px"
+            onClick={() => history.push("/")}
+          />
           {token ? (
             <ButtonWrapper>
               <Button onClick={() => history.push("/add-product")}>

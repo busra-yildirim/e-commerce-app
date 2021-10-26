@@ -29,7 +29,6 @@ function App() {
                 <SignIn />
               </LoginLayout>
             </Route>
-
             <Route path="/sign-up">
               <LoginLayout>
                 <SignUp />
