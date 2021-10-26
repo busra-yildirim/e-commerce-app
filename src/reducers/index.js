@@ -9,6 +9,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, products: action.payload };
     case "FILTER_PRODUCTS":
       return { ...state, filteredProducts: action.payload };
+    case "SELECTED_PRODUCTS":
+      return { ...state, selectedProducts: action.payload };
     default:
       return state;
   }

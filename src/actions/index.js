@@ -13,6 +13,13 @@ export const filterProducts = (filteredProducts) => {
     payload: filteredProducts,
   };
 };
+export const selected = (product) => {
+  return {
+    type: "SELECTED_PRODUCTS",
+    payload: product,
+  };
+};
+
 export const fetchAllProducts = () => async (dispatch) => {
   return api.get("/product/all").then((response) => {
     dispatch(products(response.data));

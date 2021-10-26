@@ -11,12 +11,14 @@ import {
 import OfferModal from "../../components/modals/Offer/OfferModal";
 import BuyProduct from "../../components/modals/Buying/BuyProduct";
 import checkIcon from "../../assets/Group 6792.svg";
+import { selected } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { api } from "../../api";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [selectedProduct, setSelectedProduct] = useState({});
+
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   const [notifyText, setNotifyText] = useState("");
@@ -28,6 +30,7 @@ const ProductDetailPage = () => {
   useEffect(() => {
     api.get(`/product/${id}`).then((response) => {
       setSelectedProduct(response.data);
+      dispatch(selected(response.data));
     });
   }, [dispatch, id]);
 

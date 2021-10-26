@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { setToken, setUserInfo } from "../../../utils";
 import errorIcon from "../../../assets/errorIcon.svg";
 import { api } from "../../../api";
+import Loading from "../../../components/Loading";
 
 const SignIn = () => {
   let history = useHistory();
@@ -21,9 +22,11 @@ const SignIn = () => {
   const passwordInput = useRef(null);
   const [notifyText, setNotifyText] = useState("");
   const [isError, setIsError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = (event) => {
     event.preventDefault();
+    setLoading(true);
     api
       .post("/authorization/signin", {
         email: emailInput.current.value,
@@ -32,16 +35,18 @@ const SignIn = () => {
       .then((response) => {
         setToken(response.data.access_token);
         setUserInfo(emailInput.current.value);
+        setLoading(false);
         history.push("/");
       })
       .catch((error) => {
-        alert(error);
         setIsError(true);
         setNotifyText("Emailinizi veya şifreniz hatalı.");
       });
   };
+
   return (
     <>
+      {loading && <Loading />}
       <Form onSubmit={handleClick}>
         <FormTitle> Giriş Yap </FormTitle>
         <FormInfo>Fırsatlardan yararlanmak için giriş yap!</FormInfo>
@@ -66,6 +71,7 @@ const SignIn = () => {
           <FormSpan onClick={() => history.push("/sign-up")}>Üye Ol</FormSpan>
         </FormFooter>
       </Form>
+
       {isError && (
         <Error>
           <img src={errorIcon} alt="error" />

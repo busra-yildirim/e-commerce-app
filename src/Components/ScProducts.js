@@ -2,13 +2,15 @@ import Styled from "styled-components";
 
 export const ProductWrapper = Styled.div`
    width: 280px;
-height: 392px;
+    height: 392px;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+
  
 `;
 

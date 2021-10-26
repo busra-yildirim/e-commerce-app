@@ -16,6 +16,10 @@ export const LoginPageImage = Styled.img`
         opacity: 1; 
         background-position: center center;
         background-size: cover;
+  
+        @media (max-width: 750px) {
+                display: none;
+        }
 
 `;
 export const LoginPageFormWrapper = Styled.div`
@@ -25,6 +29,10 @@ export const LoginPageFormWrapper = Styled.div`
         justify-content: center;
         align-items: center;
         border-radius: 5px;
+        @media (max-width: 750px) {
+        background: #F2F2F2 0% 0% no-repeat padding-box;
+       
+    }
 `;
 export const FormTitle = Styled.div`
        
@@ -43,9 +51,14 @@ export const Form = Styled.form`
         background-color: white;
         width: 390px;
         height: 380px;
+
+      
         `;
 export const LoginPageContainer = Styled.div`
         height: 100vh;
+        @media (max-width: 750px) {
+        background: #F2F2F2 0% 0% no-repeat padding-box;
+    }
 `;
 
 export const FormInfo = Styled.div`

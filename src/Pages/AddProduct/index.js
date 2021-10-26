@@ -48,6 +48,7 @@ const AddProduct = () => {
     event.preventDefault();
     const { productName, productDescription, brand, status, color, price } =
       event.target;
+
     const payload = {
       price: price,
       imageUrl: imageUrl,

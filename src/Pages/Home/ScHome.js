@@ -8,12 +8,14 @@ export const HeaderWrapper = Styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
 `;
 export const Header = Styled.div`
     width:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;  
+    
 `;
 
 export const HomeWrapper = Styled.div`
@@ -24,14 +26,19 @@ export const Container = Styled.div`
     max-width:1480px;
     margin: 0 auto;
     width: 100%;
+   
 
 `;
 export const AppImage = Styled.img`
     
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-
     margin-bottom: ${(props) => props.marginBottom};
+    &:hover{
+        cursor: pointer;
+    }
+   
+
 `;
 export const ContainerImage = Styled.img`
 
@@ -40,6 +47,15 @@ export const ContainerImage = Styled.img`
     height: 300px;
     border-radius:8px;
     margin-top: 10px;
+    @media (max-width: 750px) {
+        margin: 0 auto;
+        width: 100%;
+        height: 118px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        
+    }
+
     
 `;
 export const Button = Styled.button`
@@ -70,6 +86,8 @@ export const CategoryTitleWrapper = Styled.div`
     border-bottom: 1px solid #eaeaea;
     margin-bottom: 20px;
     color: #525252;
+    overflow: auto;
+    gap: 10px;
  
 
 `;

@@ -9,7 +9,7 @@ import { api } from "../../../api";
 const OfferModal = ({ closeModal }) => {
   const [isClick, setIsClicked] = useState(false);
   const selectedProduct = useSelector((state) => state.selectedProducts);
-  const [offer, setOffer] = useState(selectedProduct.price);
+  const [offer, setOffer] = useState(selectedProduct?.price);
 
   const calculateOffer = (percent) => {
     setIsClicked(true);
@@ -37,7 +37,7 @@ const OfferModal = ({ closeModal }) => {
         </div>
         <form>
           <GivenOfferWrapper>
-            <img src={selectedProduct.imageUrl} alt="" />
+            <img src={selectedProduct?.imageUrl} alt="" />
             <div className="titleAndPriceWrapper">
               <div className="title">{selectedProduct.title}</div>
               <div className="price">{selectedProduct.price} TL</div>

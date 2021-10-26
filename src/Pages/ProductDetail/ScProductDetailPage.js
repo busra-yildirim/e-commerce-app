@@ -64,6 +64,16 @@ export const SelectedProductWrapper = styled.div`
       color: #555555;
     }
   }
+  @media (max-width: 750px) {
+    flex-direction: column;
+    .productDetailImage {
+      width: 343px;
+      height: 362px;
+    }
+    .productPropertyWrapper {
+      margin-left: 30px;
+    }
+  }
 `;
 
 export const GivenOffer = styled.div`

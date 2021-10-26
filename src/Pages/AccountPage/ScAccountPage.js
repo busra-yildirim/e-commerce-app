@@ -86,7 +86,7 @@ export const ProductCard = styled.div`
 export const ProductImage = styled.img`
   width: 78px;
   height: 84px;
-  background: transparent 0% 0% no-repeat padding-box;
+  //background: transparent 0% 0% no-repeat padding-box;
   border-radius: 8px;
 `;
 export const StatusButton = styled.button`

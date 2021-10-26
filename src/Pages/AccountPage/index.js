@@ -79,8 +79,8 @@ const AccountPage = () => {
           </OfferTab>
         </div>
         {isGetOfferTab
-          ? receivedOffers.map((item) => (
-              <ProductCard>
+          ? receivedOffers?.map((item) => (
+              <ProductCard key={item.id}>
                 <div className="productWrapper">
                   <ProductImage src={item.imageUrl} alt="" />
 
@@ -113,7 +113,7 @@ const AccountPage = () => {
   </StatusButton>*/}
               </ProductCard>
             ))
-          : givenOffers.map((item) => (
+          : givenOffers?.map((item) => (
               <ProductCard>
                 <div className="productWrapper">
                   <ProductImage src={item.imageUrl} alt="" />
