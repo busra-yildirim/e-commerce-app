@@ -48,7 +48,7 @@ const AddProduct = () => {
     event.preventDefault();
     const { productName, productDescription, brand, status, color, price } =
       event.target;
-
+    console.log("status", status.value);
     const payload = {
       price: price,
       imageUrl: imageUrl,
@@ -146,7 +146,7 @@ const AddProduct = () => {
                   Kullanım durumu seç
                 </OptionProduct>
                 {status.map((item) => (
-                  <OptionProduct key={item.id} name="status">
+                  <OptionProduct key={item.id} name="status" value={item.id}>
                     {item.title}
                   </OptionProduct>
                 ))}

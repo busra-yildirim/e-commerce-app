@@ -4,7 +4,6 @@ import Products from "../../components/Products";
 
 import { setSessionStorageSelectedCategory } from "../../utils/index.js";
 import { api } from "../../api";
-import Loading from "../../components/Loading";
 
 const Home = () => {
   const [allCategories, setAllCategories] = useState([]);
