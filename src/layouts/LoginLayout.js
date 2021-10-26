@@ -5,7 +5,7 @@ import {
   LoginPageFormWrapper,
 } from "../Pages/Login/ScLogin";
 import { AppImage } from "../Pages/Home/ScHome";
-import { ReactComponent as appImage } from "../assets/Group_6607.svg";
+import appImage from "../assets/Group_6607.svg";
 
 const LoginLayout = ({ children }) => {
   return (

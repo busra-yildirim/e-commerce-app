@@ -6,7 +6,7 @@ import {
   ButtonWrapper,
   HeaderWrapper,
 } from "../Pages/Home/ScHome";
-import { ReactComponent as appImage } from "../assets/Group_6607.svg";
+import appImage from "../assets/Group_6607.svg";
 import { useHistory } from "react-router-dom";
 import { getToken } from "../utils";
 
