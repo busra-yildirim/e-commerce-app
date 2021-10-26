@@ -12,9 +12,8 @@ import accountImage from "../../assets/Group 6876.svg";
 import { GivenOffer } from "../ProductDetail/ScProductDetailPage";
 import { getUserInfo } from "../../utils";
 import BuyProduct from "../../components/modals/Buying/BuyProduct";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import checkIcon from "../../assets/Group 6792.svg";
-import { useSelector } from "react-redux";
 import { api } from "../../api";
 
 const AccountPage = () => {
@@ -22,23 +21,24 @@ const AccountPage = () => {
   const [isOpenBuyingModal, setIsOpenBuyingModal] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
   const [notifyText, setNotifyText] = useState("");
-  const offer = useSelector((state) => state.offer);
   const [isGetOfferTab, setIsGetOfferTab] = useState(true);
   const [givenOffers, setGivenOffers] = useState(null);
   const [receivedOffers, setReceivedOffers] = useState(null);
 
-  api
-    .get("/account/given-offers")
-    .then((response) => {
-      setGivenOffers(response.data);
-    })
-    .catch((error) => alert(error));
-  api
-    .get("/account/received-offers")
-    .then((response) => {
-      setReceivedOffers(response.data);
-    })
-    .catch((error) => alert(error));
+  useEffect(() => {
+    api
+      .get("/account/given-offers")
+      .then((response) => {
+        setGivenOffers(response.data);
+      })
+      .catch((error) => console.log(error));
+    api
+      .get("/account/received-offers")
+      .then((response) => {
+        setReceivedOffers(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const openBuyingModal = () => {
     setIsOpenBuyingModal(true);
@@ -82,13 +82,13 @@ const AccountPage = () => {
           ? receivedOffers?.map((item) => (
               <ProductCard key={item.id}>
                 <div className="productWrapper">
-                  <ProductImage src={item.imageUrl} alt="" />
+                  <ProductImage src={item.product.imageUrl} alt="" />
 
                   <div className="titleGivenOfferWrapper">
-                    <div className="productTitle">{item.title}</div>
+                    <div className="productTitle">{item.product.title}</div>
                     <GivenOffer background="">
                       <div>Verilen Teklif: </div>
-                      <div className="offer">{offer} TL</div>
+                      <div className="offer">{item.offeredPrice} TL</div>
                     </GivenOffer>
                   </div>
                 </div>
@@ -116,12 +116,12 @@ const AccountPage = () => {
           : givenOffers?.map((item) => (
               <ProductCard>
                 <div className="productWrapper">
-                  <ProductImage src={item.imageUrl} alt="" />
+                  <ProductImage src={item.product.imageUrl} alt="" />
                   <div className="titleGivenOfferWrapper">
-                    <div className="productTitle">{item.title}</div>
+                    <div className="productTitle">{item.product.title}</div>
                     <GivenOffer background="">
                       <div>Verilen Teklif: </div>
-                      <div className="offer">{offer} TL</div>
+                      <div className="offer">{item.offeredPrice} TL</div>
                     </GivenOffer>
                   </div>
                 </div>

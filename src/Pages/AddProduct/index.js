@@ -8,21 +8,19 @@ import {
   ProductInput,
 } from "./ScAddProduct";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import DropArea from "../../components/DropArea";
 import { api } from "../../api";
+import Loading from "../../components/Loading";
+
 const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [color, setColor] = useState([]);
   const [brand, setBrand] = useState([]);
-  const [status, setStatus] = useState([]);
+  const [status, setstatus] = useState([]);
   const [imageUrl, setImageUrl] = useState(null);
-  /*
-  api
-    .post("/product/create", )
-    .then((response) => {})
-    .catch((error) => alert("error"));
-*/
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef(null);
   useEffect(() => {
     api.get("/detail/category/all").then((response) => {
       setCategories(response.data);
@@ -40,139 +38,157 @@ const AddProduct = () => {
   }, []);
   useEffect(() => {
     api.get("/detail/status/all").then((response) => {
-      setStatus(response.data);
+      setstatus(response.data);
     });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { productName, productDescription, brand, status, color, price } =
-      event.target;
-    console.log("status", status.value);
+    setLoading(true);
+    const {
+      productName,
+      productDescription,
+      brand,
+      status,
+      color,
+      price,
+      category,
+    } = event.target;
+
     const payload = {
-      price: price,
+      price: price.value,
       imageUrl: imageUrl,
       title: productName.value,
       status: {
-        title: status,
-        id: "string",
+        title: status.selectedOptions[0].text,
+        id: status.value,
       },
       color: {
-        title: color,
-        id: "string",
+        title: color.selectedOptions[0].text,
+        id: color.value,
       },
       brand: {
-        title: brand,
-        id: "string",
+        title: brand.selectedOptions[0].text,
+        id: brand.value,
       },
       category: {
-        title: "string",
-        id: "string",
+        title: category.selectedOptions[0].text,
+        id: category.value,
       },
       description: productDescription.value,
       isOfferable: true,
     };
-    console.log("payload", payload);
+
+    api
+      .post("/product/create", payload)
+      .then((response) => {
+        setLoading(false);
+        formRef.current.reset();
+      })
+      .catch((error) => alert(error.message));
   };
   return (
-    <AddProductWrapper>
-      <FormProduct onSubmit={handleSubmit}>
-        <Product flex="5">
-          <div> Ürün Detayları </div>
-          <ProductLabel>Ürün Adı</ProductLabel>
-          <ProductInput
-            type="text"
-            placeholder="Örnek: Iphone 12 Pro Max"
-            required
-            height="45px"
-            width="730px"
-            maxLength="100"
-            name="productName"
-          />
-          <ProductLabel>Açıklama</ProductLabel>
-          <ProductInput
-            type="text"
-            placeholder="Ürün açıklaması girin"
-            required
-            height="92px"
-            width="730px"
-            maxLength="500"
-            name="productDescription"
-          />
-          <div className="Select">
-            <div className="SelectWrapper">
-              <ProductLabel>Kategori</ProductLabel>
-              <SelectProduct required>
-                <OptionProduct value="" defaultValue>
-                  Kategori seç
-                </OptionProduct>
-                {categories.map((item) => (
-                  <OptionProduct key={item.id} name="category">
-                    {item.title}
+    <>
+      {loading && <Loading />}
+      <AddProductWrapper>
+        <FormProduct onSubmit={handleSubmit} ref={formRef}>
+          <Product flex="5">
+            <div> Ürün Detayları </div>
+            <ProductLabel>Ürün Adı</ProductLabel>
+            <ProductInput
+              type="text"
+              placeholder="Örnek: Iphone 12 Pro Max"
+              required
+              height="45px"
+              width="730px"
+              maxLength="100"
+              name="productName"
+            />
+            <ProductLabel>Açıklama</ProductLabel>
+            <ProductInput
+              type="text"
+              placeholder="Ürün açıklaması girin"
+              required
+              height="92px"
+              width="730px"
+              maxLength="500"
+              name="productDescription"
+            />
+            <div className="Select">
+              <div className="SelectWrapper">
+                <ProductLabel>Kategori</ProductLabel>
+                <SelectProduct required name="category">
+                  <OptionProduct value="" defaultValue>
+                    Kategori seç
                   </OptionProduct>
-                ))}
-              </SelectProduct>
-            </div>
-            <div className="SelectWrapper">
-              <ProductLabel>Marka</ProductLabel>
-              <SelectProduct required>
-                <OptionProduct value="" defaultValue>
-                  Marka seç
-                </OptionProduct>
-                {brand.map((item) => (
-                  <OptionProduct key={item.id} name="brand">
-                    {item.title}
+                  {categories.map((item) => (
+                    <OptionProduct key={item.id} value={item.id}>
+                      {item.title}
+                    </OptionProduct>
+                  ))}
+                </SelectProduct>
+              </div>
+              <div className="SelectWrapper">
+                <ProductLabel>Marka</ProductLabel>
+                <SelectProduct required name="brand">
+                  <OptionProduct value="" defaultValue>
+                    Marka seç
                   </OptionProduct>
-                ))}
-              </SelectProduct>
-            </div>
-            <div className="SelectWrapper">
-              <ProductLabel>Renk</ProductLabel>
-              <SelectProduct required>
-                <OptionProduct value="" defaultValue>
-                  Renk seç
-                </OptionProduct>
-                {color.map((item) => (
-                  <OptionProduct key={item.id} name="color">
-                    {item.title}
+                  {brand.map((item) => (
+                    <OptionProduct key={item.id} value={item.id}>
+                      {item.title}
+                    </OptionProduct>
+                  ))}
+                </SelectProduct>
+              </div>
+              <div className="SelectWrapper">
+                <ProductLabel>Renk</ProductLabel>
+                <SelectProduct required name="color">
+                  <OptionProduct value="" defaultValue>
+                    Renk seç
                   </OptionProduct>
-                ))}
-              </SelectProduct>
-            </div>
-            <div className="SelectWrapper">
-              <ProductLabel>Kullanım Durumu</ProductLabel>
-              <SelectProduct required>
-                <OptionProduct value="" defaultValue>
-                  Kullanım durumu seç
-                </OptionProduct>
-                {status.map((item) => (
-                  <OptionProduct key={item.id} name="status" value={item.id}>
-                    {item.title}
+                  {color.map((item) => (
+                    <OptionProduct key={item.id} value={item.id}>
+                      {item.title}
+                    </OptionProduct>
+                  ))}
+                </SelectProduct>
+              </div>
+              <div className="SelectWrapper">
+                <ProductLabel>Kullanım Durumu</ProductLabel>
+                <SelectProduct required name="status">
+                  <OptionProduct value="" defaultValue>
+                    Kullanım durumu seç
                   </OptionProduct>
-                ))}
-              </SelectProduct>
+                  {status.map((item) => (
+                    <OptionProduct key={item.id} value={item.id}>
+                      {item.title}
+                    </OptionProduct>
+                  ))}
+                </SelectProduct>
+              </div>
+              <div className="priceAndOfferWrapper">
+                <ProductLabel>Fiyat</ProductLabel>
+                <ProductInput
+                  type="number"
+                  placeholder="Bir fiyat girin TL"
+                  required
+                  height="45px"
+                  width="236px"
+                  name="price"
+                />
+                <ProductLabel>Teklif opsiyonu</ProductLabel>
+                <input type="radio" />
+              </div>
             </div>
-            <div className="priceAndOfferWrapper">
-              <ProductLabel>Fiyat</ProductLabel>
-              <ProductInput
-                type="number"
-                placeholder="Bir fiyat girin TL"
-                required
-                height="45px"
-                width="236px"
-                name="price"
-              />
-              <ProductLabel>Teklif opsiyonu</ProductLabel>
-              <input type="radio" />
-            </div>
-          </div>
-        </Product>
-        <DropArea changeImageUrl={setImageUrl} />
-        <button type="submit" className="saveButton">
-          Kaydet
-        </button>
-      </FormProduct>
-    </AddProductWrapper>
+          </Product>
+          <DropArea changeImageUrl={setImageUrl} />
+          <button type="submit" className="saveButton">
+            Kaydet
+          </button>
+        </FormProduct>
+      </AddProductWrapper>
+    </>
   );
 };
 
